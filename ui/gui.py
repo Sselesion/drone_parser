@@ -42,9 +42,13 @@ class MainWindow(QWidget):
             self.listCheckBox[i] = QCheckBox(v)
             GridCB.addWidget(self.listCheckBox[i], i, 0)
         # Custom spacer
-        mySpacer = QWidget()
-        mySpacer.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-        GridCB.addWidget(mySpacer)
+        vSpacer = QWidget()
+        hSpacer = QWidget()
+        vSpacer.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+        hSpacer.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+
+        GridCB.addWidget(vSpacer)
+
 
         vLayout = QVBoxLayout()
 
@@ -61,21 +65,28 @@ class MainWindow(QWidget):
         vLayout.addLayout(hLayoutMain)
 
         #  footer h layout
-        self.parseBtn = QPushButton('Start parsing')
+        hLayoutFooter.addWidget(hSpacer)
+
+        self.parseBtn = QPushButton('Спарсить')
         hLayoutFooter.addWidget(self.parseBtn)
+
+        self.saveBtn = QPushButton('Сохранить')
+        hLayoutFooter.addWidget(self.saveBtn)
+
         vLayout.addLayout(hLayoutFooter)
 
         #  window layout
         self.setLayout(vLayout)
-        # central_widget = QWidget()
-        # self.setCentralWidget(central_widget)
-        # central_widget = vLayout
 
         # actions
         self._createAction()
 
     def _createAction(self):
         self.parseBtn.clicked.connect(self._startParsing)
+        self.saveBtn.clicked.connect(self._save)
+
+    def _save(self):
+        self.loggerWidget.error('implement me!!')
 
     def _startParsing(self):
         parsing_sites_ids = []
@@ -92,9 +103,6 @@ class MainWindow(QWidget):
         #                        " ".join(str(id) for id in parsing_sites_ids) +
         #                        "\tparsing sites urls:" +
         #                        " ".join(str(url) for url in parsing_sites_url))
-
-    def checkboxChanged(self):
-        self.labelResult.setText("")
 
 
 if __name__ == "__main__":
