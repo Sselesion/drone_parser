@@ -52,7 +52,48 @@ class CompFlightController(Comp):
     firmware: str  # Прошивка (название);
     presence_of_a_usb_connector: str  # Наличие usb разъема;
     fastening: list[str]  # Крепление (посадочное место для крепления. Здесь нужно расстояние между отверстиями т.е. 40мм*50мм);
-    
+
+
+class CompLidar(Comp):
+    max_range: str  # Максимальная дальность использования (метров)
+    frequency: str  # Частота импульсов (Герц)
+    power_supply: str  # Питание (вольт)
+
+
+class CompFlightController(Comp):
+    clock_requency: str  # Тактовая частота (МГц)
+    flash_memory_capacity: str  # Объем флеш памяти (Кб)
+    # посадочное место для крепления (расстояние между отверстиями т.е. 40мм*50мм)
+    mounting: list[str]
+    min_input_voltage: str  # Минимальное входное напряжение (Вольт)
+    max_input_voltage: str  # Максимальное входное напряжение (Вольт)
+    uart_ports_number: str  # Число UART портов
+
+
+class CompRangeFinder(Comp):
+    max_range: str  # Максимальная дальность использования (метров)
+    frequency: str  # Частота работы (Гц)
+    wave_length: str  # Длина волны (нм)
+    power_supply: str  # Питание (вольт)
+
+
+class CompSatelliteCommModule(Comp):
+    battery_availability: bool  # Наличие батареи
+    battery_life: str  # Время работы от батареи (часов)
+    accuracy: str  # Погрешность (м)
+
+
+class CompLeashingPlatform(Comp):
+    max_speed: str  # Максимальная скорость (км/ч)
+    gaining_speed: str  # Скорость набора высоты (км/ч)
+    deceleration_speed: str  # Скорость снижения (км/ч)
+    flight_range: str  # Максимальная дальность полета (м)
+    flight_altitude: str  # Максимальная высота полета (м)
+    power_consumption: str  # Энергопотребление (Вт/ч)
+    payload_weight: str  # Масса полезной погрузки (г)
+    flight_time: str  # Продолжительность полета (мин)
+    screws_number: str  # Число винтов
+
 
 class ThermalCamera(Comp):
     range_detection: str # Дальность обнаружения (м)
