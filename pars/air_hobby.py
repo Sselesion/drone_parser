@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 from models import *
 
-from .base import Parse
+from ._base import Parse
 from .regex import PtrnEnum, Regex
 
 
@@ -221,16 +221,4 @@ class AirHobbyParser(Parse):
         if div_description:
             text_list.append(div_description.get_text(" ", strip=True))
         
-        cc =  Comp(
-            url=url,
-            image=image,
-            price=price,
-            name=name
-        )
-        print(cc.dict())
-        
-        return cc
-        # regex = Regex(text_list)
-        # print(">>>", regex.raw_text)
-
-        # return self.fabric[comp](url, image, price, name, regex)
+        return self.fabric[comp](url, image, price, name, text_list)

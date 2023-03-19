@@ -236,6 +236,210 @@ class SearchParamEnum(Enum):
         ["напряжение"],
         ["в", "вольт", "v", "volt"],
     )
+    
+    #Microcontroller
+    OPERATING_FREQUENCY = (
+        ['частота'],
+        ['гц', 'ггц', 'мгц'],
+    )
+    NUMBER_OF_CHANNELS = (
+        ['каналов', "потоков"],
+        [],
+    )
+    OPERATING_CURRENTА = (
+        [],
+        [],
+    )
+    WORKING_VOLTAGE = (
+        ["напряжение"],
+        ["в", "вольт", "v", "volt"],
+    )
+    TRANSMISSION_POWER = (
+        ["мощность"],
+        ["дбм"],
+    )
+    CHANNEL_RESOLUTION = (
+        ["канал", "канала"],
+        [""],
+    )
+    WIRELESS_PROTOCOL = (
+        [],
+        [],
+    )
+
+    # ElectricMotor
+    MAXIMUM_POWER = (
+        ["мощность"],
+        ["ватт", "вт"],
+    )
+    RECOMMENDED_BATTERY = (
+        [],
+        [],
+    )
+    NOLOAD_CURRENT = (
+        [],
+        [],
+    )
+    PEAK_CURRENT = (
+        [],
+        [],
+    )
+    STATOR_LENGTH = (
+        [],
+        [],
+    )
+    STATOR_DIAMETER = (
+        [],
+        [],
+    )
+    SHAFT_DIAMETER = (
+        [],
+        [],
+    )
+    NUMBER_OF_REVOLUTIONS_PER_VOLT = (
+        [],
+        [],
+    )
+    RESISTANCE = (
+        ["сопротивление"],
+        ["ом"],
+    )
+
+    # MotorController
+    OPERATING_CURRENT = (
+        ["ток"],
+        ["ампер", "а", "амп", "a"],
+    )
+    POWER_SUPPORT = (
+        [],
+        [],
+    )
+
+    # FlightController
+    PRESENCE_OF_A_BAROMETER = (
+        [],
+        [],
+    )
+    PRESENCE_OF_A_BLACK_BOX = (
+        [],
+        [],
+    )
+    POWER = (
+        ['питание', 'ток'],
+        ["в", "вольт", "v", "volt"],
+    )
+    FIRMWARE = (
+        [],
+        [],
+    )
+    PRESENCE_OF_A_USB_CONNECTOR = (
+        [],
+        [],
+    )
+    FASTENING = (
+        [],
+        [],
+    )
+
+    # Lidar
+    MAX_RANGE = (
+        ['дальность', 'расстояние'],
+        ['м', 'км', 'метров', 'километров'],
+    )
+    FREQUENCY = (
+        ['частота'],
+        ['гц', 'ггц', 'мгц'],
+    )
+    POWER_SUPPLY = (
+        ['питание', 'ток'],
+        ["в", "вольт", "v", "volt"],
+    )
+
+    # MicroFlightController
+
+    CLOCK_FREQUENCY = (
+        ['частота', 'тактовая'],
+        ['гц', 'ггц', 'мгц'],
+    )
+    FLASH_MEMORY_CAPACITY = (
+        ['память', 'памяти'],
+        ['кб', 'мб', 'кбайт', 'мбайт', 'байт'],
+    )
+    MOUNTING = (
+        ["крепление"],
+        ["мм", "см"],
+    )
+    MIN_INPUT_VOLTAGE = (
+        ["минимальное", "входное"],
+        ["в", "вольт", "v", "volt"]
+    )
+    MAX_INPUT_VOLTAGE = (
+        ["максимальное", "входное"],
+        ["в", "вольт", "v", "volt"]
+    )
+    UART_PORTS_NUMBER = (
+        ["uart"],
+        [],
+    )
+
+    # Rangefinder
+
+    WAVE_LENGTH = (
+        ["волны", "волна"],
+        ["нм"],
+    )
+
+    # Satellitecommmodule
+    BATTERY_AVAILABILITY = (
+        ["батарея"],
+        [],
+    )
+    BATTERY_LIFE = (
+        ["время", "работы"],
+        ["мин", "минут", "часов"],
+    )
+    ACCURACY = (
+        ["погрешность", "точность"],
+        [],
+    )
+
+    # Leashingplatform
+    MAX_SPEED = (
+        [],
+        [],
+    )
+    GAINING_SPEED = (
+        [],
+        [],
+    )
+    DECELERATION_SPEED = (
+        [],
+        [],
+    )
+    FLIGHT_RANGE = (
+        [],
+        [],
+    )
+    FLIGHT_ALTITUDE = (
+        [],
+        [],
+    )
+    POWER_CONSUMPTION = (
+        [],
+        [],
+    )
+    PAYLOAD_WEIGHT = (
+        [],
+        [],
+    )
+    FLIGHT_TIME = (
+        [],
+        [],
+    )
+    SCREWS_NUMBER = (
+        [],
+        [],
+    )
 
     def __init__(self, key_words: list[str], units: list[str]) -> None:
         self.key_words = key_words
