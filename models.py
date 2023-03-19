@@ -213,3 +213,30 @@ class CompEnum(Enum):
     VIDEOTRANSMITTER = auto()
     PAYLOAD = auto()
     CONTROLPANEL = auto()
+
+
+class SearchParamEnum(Enum):
+    """Параметры, необходимые для запуска метода поиска значений в
+    тексте (в модуле `pars._get_values`)"""
+
+    # Battery
+    CURRENT_DISCHARGE = (
+        ["разряд тока", "разряд", "ток разряда", "выходной ток", "ток выхода"],
+        ["ампер", "а", "амп", "a"],
+    )
+    CAPASITY = (
+        ["емкость", "ёмкость", "capacity"],
+        ["мач", "ач", "ah", "mah", "мaч", "maч", "mач"],
+    )
+    SHAPE = (
+        ["длина", "ширина", "высота", "размер", "форм фактор", "габариты"],
+        ["см", "м", "дм", "cm", "m", "dm", "cм"],
+    )
+    VOLTAGE = (
+        ["напряжение"],
+        ["в", "вольт", "v", "volt"],
+    )
+
+    def __init__(self, key_words: list[str], units: list[str]) -> None:
+        self.key_words = key_words
+        self.units = units

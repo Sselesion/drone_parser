@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 from models import *
 
-from .base import Parse
+from ._base import Parse
 from .regex import PtrnEnum, Regex
 
 
@@ -219,33 +219,6 @@ class AeromotusParser(Parse):
         if div_specification:
             text_list.append(div_specification.get_text(" ", strip=True))
 
-        regex = Regex(text_list)
-        print(">>>", regex.raw_text)
+        # regex = Regex(text_list)
 
-        return self.fabric[comp](url, image, price, name, regex)
-
-    def parse_battery(
-        self, url: str, image: str, price: str, name: str, regex: Regex
-    ) -> CompBattery:
-        """Парсинг характеристики "Батарея" с использованием регулярных выражений
-
-        Args:
-            url: URL адрес карточки
-            image: URL адрес фотографии
-            price: Цена
-            name: Название
-            regex: Экземпляр класса Regex. Который служит для поиска с помощью регулярных выражений
-
-        Returns:
-            Объект типа CompCompBattery
-        """
-        return CompBattery(
-            url=url,
-            image=image,
-            price=price,
-            name=name,
-            current_discharge=regex.find_by(PtrnEnum.CURRENT_DISCHARGE),
-            capasity=regex.find_by(PtrnEnum.CAPASITY),
-            shape=regex.find_by(PtrnEnum.SHAPE),
-            voltage=regex.find_by(PtrnEnum.VOLTAGE),
-        )
+        return self.fabric[comp](url, image, price, name, text_list)

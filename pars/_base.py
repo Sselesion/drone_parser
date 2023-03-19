@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Type
+from ._get_values import GetValues
 
 from models import *
 
@@ -49,22 +49,27 @@ class Parse(ABC):
     def run(comp: int) -> list:
         pass
 
+    @staticmethod
     def parse_battery(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompBattery:
+        get_values = GetValues(text_list)
         return CompBattery(
             url=url,
             image=image,
             price=price,
             name=name,
-            current_discharge="filler",
-            capasity="filler",
-            shape="filler",
-            voltage="filler",
+            current_discharge=get_values.get_numeric_value(
+                SearchParamEnum.CURRENT_DISCHARGE
+            ),
+            capasity=get_values.get_numeric_value(SearchParamEnum.CAPASITY),
+            shape=get_values.get_numeric_value(SearchParamEnum.SHAPE),
+            voltage=get_values.get_numeric_value(SearchParamEnum.VOLTAGE),
         )
 
+    @staticmethod
     def parse_microcontroller(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompMicrocontroller:
         return CompMicrocontroller(
             url="filler",
@@ -80,8 +85,9 @@ class Parse(ABC):
             wireless_protocol="filler",
         )
 
+    @staticmethod
     def parse_electricmotor(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompElectricMotor:
         return CompElectricMotor(
             url="filler",
@@ -100,8 +106,9 @@ class Parse(ABC):
             resistance="filler",
         )
 
+    @staticmethod
     def parse_motorcontroller(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompMotorController:
         return CompMotorController(
             url="filler",
@@ -113,8 +120,9 @@ class Parse(ABC):
             power_support="filler",
         )
 
+    @staticmethod
     def parse_flightcontroller(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompFlightController:
         return CompFlightController(
             url="filler",
@@ -129,8 +137,9 @@ class Parse(ABC):
             fastening=["filler"],
         )
 
+    @staticmethod
     def parse_lidar(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompLidar:
         return CompLidar(
             url="filler",
@@ -142,8 +151,9 @@ class Parse(ABC):
             power_supply="filler",
         )
 
+    @staticmethod
     def parse_microflightcontroller(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompMicroFlightController:
         return CompMicroFlightController(
             url="filler",
@@ -158,8 +168,9 @@ class Parse(ABC):
             uart_ports_number="filler",
         )
 
+    @staticmethod
     def parse_rangefinder(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompRangeFinder:
         return CompRangeFinder(
             url="filler",
@@ -172,8 +183,9 @@ class Parse(ABC):
             power_supply="filler",
         )
 
+    @staticmethod
     def parse_satellitecommmodule(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompSatelliteCommModule:
         return CompSatelliteCommModule(
             url="filler",
@@ -185,8 +197,9 @@ class Parse(ABC):
             accuracy="filler",
         )
 
+    @staticmethod
     def parse_leashingplatform(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompLeashingPlatform:
         return CompLeashingPlatform(
             url="filler",
@@ -204,8 +217,9 @@ class Parse(ABC):
             screws_number="filler",
         )
 
+    @staticmethod
     def parse_thermalcamera(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompThermalCamera:
         return CompThermalCamera(
             url="filler",
@@ -225,8 +239,9 @@ class Parse(ABC):
             type_of_sensor="filler",
         )
 
+    @staticmethod
     def parse_uavcoptertype(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompUAVCopterType:
         return CompUAVCopterType(
             url="filler",
@@ -244,8 +259,9 @@ class Parse(ABC):
             number_of_screws="filler",
         )
 
+    @staticmethod
     def parse_videotransmitter(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompVideoTransmitter:
         return CompVideoTransmitter(
             url="filler",
@@ -258,8 +274,9 @@ class Parse(ABC):
             antenna_connector="filler",
         )
 
+    @staticmethod
     def parse_payload(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompPayload:
         return CompPayload(
             url="filler",
@@ -288,8 +305,9 @@ class Parse(ABC):
             number_of_channels="filler",
         )
 
+    @staticmethod
     def parse_controlpanel(
-        self, url: str, image: str, price: str, name: str, tiplyakov: Type
+        url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompControlPanel:
         return CompControlPanel(
             url="filler",
