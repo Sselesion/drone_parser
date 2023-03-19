@@ -119,10 +119,6 @@ class AeromotusParser(Parse):
                 },
             ),
         }
-        self.key_words = {
-            CompEnum.BATTERY: ["аккумулятор", "батарея"],
-            CompEnum.UAVCOPTERTYPE: [],
-        }
 
     def run(self, comp: CompEnum) -> dict[str, Comp]:
         result = {}
