@@ -2,11 +2,16 @@ import re
 from enum import Enum
 import models
 
+
 class CompFieldType(Enum):
     unit = 1
     range = 2
     boolean = 3
+    justNumber = 4
 
+
+yes_list = ['да', 'есть', '+', 'yes', 'yep']
+no_list = ['отсуствует', '-', 'нет', 'nope', 'no']
 
 battery_dict = {
     'current_discharge': {
@@ -34,6 +39,77 @@ battery_dict = {
         'CompFieldType': CompFieldType.unit
     }
 }
+
+microcontroller = {
+    'operating_frequency': {
+        'keyw': ['Микроконтроллер', 'Микропроцессор', 'чип'],
+        'units': ['ГГц', 'Гц', 'Ghz', 'hz'],
+        'rezValue': '',
+        'CompFieldType': CompFieldType.unit
+    },
+    'number_of_channels': {
+        'keyw': ['число каналов', 'количество каналов', 'каналы'],
+        'units': [],
+        'rezValue': '',
+        'CompFieldType': CompFieldType.justNumber
+    },
+    'operating_current': {
+        'keyw': ['рабочий ток', 'ток'],
+        'units': ['а', 'ма', 'мка', 'a', 'ma', 'mca'],
+        'rezValue': '',
+        'CompFieldType': CompFieldType.unit
+    },
+    'working_voltage': {
+        'keyw': ['напряжение', 'voltage'],
+        'units': ['в', 'вольт', 'volt', 'v'],
+        'rezValue': '',
+        'CompFieldType': CompFieldType.unit
+    },
+    'transmission_power': {
+        'keyw': ['Мощность передачи', 'мощность'],
+        'units': ['вт', 'дбм', 'дб'],
+        'rezValue': '',
+        'CompFieldType': CompFieldType.unit
+    },
+    'channel_resolution': {
+        'keyw': ['Разрешение канала', 'Разрешение', 'ширина канала'],
+        'units': ['бит', 'bit', 'байт', 'byte'],
+        'rezValue': '',
+        'CompFieldType': CompFieldType.unit
+    },
+    'wireless_protocol': {
+        'keyw': ['Беспроводной протокол'],
+        'units': ['в', 'вольт', 'volt', 'v'],
+        'rezValue': '',
+        'CompFieldType': CompFieldType.unit
+    }
+
+}
+
+
+def ParseBoolean(text: str, keywords: list, localization: int) -> object:
+    for kw in keywords:
+        idx = text.find(kw)
+        if idx == -1:
+            continue
+
+        idx_end = idx + localization
+        if idx_end > len(text):
+            idx_end = len(text)
+
+        target_area = text[idx:idx_end]
+
+        for unit in yes_list:
+            index = target_area.find(' ' + unit + ' ')
+            if index == -1:
+                continue
+            return 'да'
+
+        for unit in no_list:
+            index = target_area.find(' ' + unit + ' ')
+            if index == -1:
+                continue
+            return 'нет'
 
 
 def ParseUnit(text: str, keywords: list, units: list, localization: int) -> object:
@@ -90,26 +166,27 @@ def ParseDict(obj_dict, text, localization=100):
         if obj_dict[field]['CompFieldType'] == CompFieldType.unit:
             obj_dict[field]['rezValue'] = ParseUnit(text, list_keyw, list_unit, localization)
 
-        if obj_dict[field][''] == CompFieldType.range:
+        if obj_dict[field]['CompFieldType'] == CompFieldType.range:
             pass
 
-        if obj_dict[field][''] == CompFieldType.boolean:
-            pass
+        if obj_dict[field]['CompFieldType'] == CompFieldType.boolean:
+            obj_dict[field]['rezValue'] = ParseBoolean(text, list_keyw, localization)
 
-    print(obj_dict)
+    # print(obj_dict)
     return obj_dict
 
 
 def StartPars(url, image, price, name, comp_type: str, text: str):
     if comp_type == 'CompBattery':
         battery_dict_filled = ParseDict(battery_dict, text)
+        # print(["{0}: {1}".format(i[0], i[1]) for i in zip(battery_dict_filled.keys(),)])
         battery_object = ClassGenerator(url, image, price, name, battery_dict_filled)
         return battery_object
 
 
 if __name__ == "__main__":
     txt = """
-    
+
 <!DOCTYPE html>
 <html lang="ru-RU">
 <head>
@@ -5092,5 +5169,8 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 </html>
     """
     rez = StartPars('', '', '', '', 'CompBattery', txt)
-    print(rez)
-    print(dir(rez))
+
+    print(rez.__dict__)
+    # attrs = [attr for attr in dir(rez)
+    #               if not attr.startswith('__')]
+    # print([f for f in dir(rez) if not callable(getattr(rez,f)) and not f.startswith('__')])
