@@ -122,11 +122,9 @@ class MainWindow(QWidget):
         button = dlg.exec()
 
         if button == QMessageBox.StandardButton.Yes:
-            print("Да")
+            pass
         else:
-            print("Нет")
-        # if button == QMessageBox.standardButton:
-        #     print("OK!")
+            pass
 
     def _startParsing(self):
         parsing_sites_ids = []
