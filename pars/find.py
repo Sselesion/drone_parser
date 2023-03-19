@@ -158,7 +158,7 @@ def ParseUnit(text: str, keywords: list, units: list, localization: int) -> obje
             nums = re.findall(r'\d*\.\d+|\d+', target_area[:index])
             nums = [float(i) for i in nums]
 
-            return nums[0]
+            return nums[-1]
 
 
 def ClassGenerator(url, image, price, name, objDict):
