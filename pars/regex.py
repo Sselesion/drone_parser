@@ -7,14 +7,17 @@ class PtrnEnum(Enum):
     VOLTAGE = r" напряжение[ а-я]*:? (\d+,?\d+)"
     SHAPE = r" размер[ а-я]*:? ([\d+[×XxхХ\]?\d+]+)"
     CURRENT_DISCHARGE = r" разряд тока:? (\d+) [м]?[А]"
+    INTERFACE = r""
 
 
 class Regex:
-    def __init__(self, texts) -> None:
+    def __init__(self, texts: list) -> None:
         self.raw_text = self.format_text(texts)
 
-    def format_text(self, texts):
-        return " " + " ".join(texts).lower().replace("\n", " ").strip()
+    def format_text(self, texts: list):
+        result = " ".join(texts).lower().replace("\n", " ").strip()
+        filter_result = list(filter(lambda el: el != '', result.split()))
+        return " " + " ".join(filter_result)
 
     def find_by(self, ptrn: PtrnEnum) -> str:
         regexp = re.compile(ptrn.value)
