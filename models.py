@@ -403,6 +403,40 @@ class SearchParamEnum(Enum):
         [],
     )
 
+    # Leashingplatform
+    MAX_SPEED = (
+        [],
+        [],
+    )
+    GAINING_SPEED = (
+        [],
+        [],
+    )
+    DECELERATION_SPEED = (
+        [],
+        [],
+    )
+    FLIGHT_RANGE = (
+        [],
+        [],
+    )
+    FLIGHT_ALTITUDE = (
+        [],
+        [],
+    )
+    PAYLOAD_WEIGHT = (
+        [],
+        [],
+    )
+    FLIGHT_TIME = (
+        [],
+        [],
+    )
+    SCREWS_NUMBER = (
+        [],
+        [],
+    )
+
     # TermalCamera
     RANGE_DETECTION = (
         ["дальность", "обнаружения", "видимости", "сканирования", "видимость"],
@@ -459,17 +493,9 @@ class SearchParamEnum(Enum):
         ["энергопотребление", "потребление"],
         ["вт/ч", "w/h"]
     )
-    PAYLOAD_WEIGHT = (
-        ["масса полезной погрузки", "масса погрузки"],
-        ["г", "кг"]
-    )
-    FLIGHT_TIME = (
-        ["продолжительность полета", "время полета"],
-        ["мин", "час", "ч"]
-    )
     NUMBER_OF_SCREws = (
         ["число винтов", "винты", "винтов"],
-        []
+        [""]
     )
 
     #VideoTransmitter

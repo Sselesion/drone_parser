@@ -71,254 +71,268 @@ class Parse(ABC):
     def parse_microcontroller(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompMicrocontroller:
+        get_values = GetValues(text_list)
         return CompMicrocontroller(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            operating_frequency="filler",
-            number_of_channels="filler",
-            operating_current="filler",
-            working_voltage="filler",
-            transmission_power="filler",
-            channel_resolution="filler",
-            wireless_protocol="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            operating_frequency=get_values.get_numeric_value(SearchParamEnum.OPERATING_FREQUENCY),
+            number_of_channels=get_values.get_numeric_value(SearchParamEnum.NUMBER_OF_CHANNELS),
+            operating_current=get_values.get_numeric_value(SearchParamEnum.OPERATING_CURRENT),
+            working_voltage=get_values.get_numeric_value(SearchParamEnum.WORKING_VOLTAGE),
+            transmission_power=get_values.get_numeric_value(SearchParamEnum.TRANSMISSION_POWER),
+            channel_resolution=get_values.get_numeric_value(SearchParamEnum.CHANNEL_RESOLUTION),
+            wireless_protocol=get_values.get_numeric_value(SearchParamEnum.WIRELESS_PROTOCOL),
         )
 
     @staticmethod
     def parse_electricmotor(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompElectricMotor:
+        get_values = GetValues(text_list)
         return CompElectricMotor(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            voltage="filler",
-            maximum_power="filler",
-            recommended_battery="filler",
-            noload_current="filler",
-            peak_current="filler",
-            stator_length="filler",
-            stator_diameter="filler",
-            shaft_diameter="filler",
-            number_of_revolutions_per_volt="filler",
-            resistance="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            voltage=get_values.get_numeric_value(SearchParamEnum.VOLTAGE),
+            maximum_power=get_values.get_numeric_value(SearchParamEnum.MAXIMUM_POWER),
+            recommended_battery=get_values.get_numeric_value(SearchParamEnum.RECOMMENDED_BATTERY),
+            noload_current=get_values.get_numeric_value(SearchParamEnum.NOLOAD_CURRENT),
+            peak_current=get_values.get_numeric_value(SearchParamEnum.PEAK_CURRENT),
+            stator_length=get_values.get_numeric_value(SearchParamEnum.STATOR_LENGTH),
+            stator_diameter=get_values.get_numeric_value(SearchParamEnum.STATOR_DIAMETER),
+            shaft_diameter=get_values.get_numeric_value(SearchParamEnum.SHAFT_DIAMETER),
+            number_of_revolutions_per_volt=get_values.get_numeric_value(SearchParamEnum.NUMBER_OF_REVOLUTIONS_PER_VOLT),
+            resistance=get_values.get_numeric_value(SearchParamEnum.RESISTANCE),
         )
 
     @staticmethod
     def parse_motorcontroller(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompMotorController:
+        get_values = GetValues(text_list)
         return CompMotorController(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            operating_current="filler",
-            peak_current="filler",
-            power_support="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            operating_current=get_values.get_numeric_value(SearchParamEnum.OPERATING_CURRENT),
+            peak_current=get_values.get_numeric_value(SearchParamEnum.PEAK_CURRENT),
+            power_support=get_values.get_numeric_value(SearchParamEnum.POWER_SUPPORT),
         )
 
     @staticmethod
     def parse_flightcontroller(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompFlightController:
+        get_values = GetValues(text_list)
         return CompFlightController(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            presence_of_a_barometer="filler",
-            presence_of_a_black_box="filler",
-            power="filler",
-            firmware="filler",
-            presence_of_a_usb_connector="filler",
-            fastening=["filler"],
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            presence_of_a_barometer=get_values.get_numeric_value(SearchParamEnum.PRESENCE_OF_A_BAROMETER),
+            presence_of_a_black_box=get_values.get_numeric_value(SearchParamEnum.PRESENCE_OF_A_BLACK_BOX),
+            power=get_values.get_numeric_value(SearchParamEnum.POWER),
+            firmware=get_values.get_numeric_value(SearchParamEnum.FIRMWARE),
+            presence_of_a_usb_connector=get_values.get_numeric_value(SearchParamEnum.PRESENCE_OF_A_USB_CONNECTOR),
+            fastening=[get_values.get_numeric_value(SearchParamEnum.FASTENING)],
         )
 
     @staticmethod
     def parse_lidar(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompLidar:
+        get_values = GetValues(text_list)
         return CompLidar(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            max_range="filler",
-            frequency="filler",
-            power_supply="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            max_range=get_values.get_numeric_value(SearchParamEnum.MATRIX),
+            frequency=get_values.get_numeric_value(SearchParamEnum.FREQUENCY),
+            power_supply=get_values.get_numeric_value(SearchParamEnum.POWER_SUPPLY),
         )
 
     @staticmethod
     def parse_microflightcontroller(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompMicroFlightController:
+        get_values = GetValues(text_list)
         return CompMicroFlightController(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            clock_requency="filler",
-            flash_memory_capacity="filler",
-            mounting="filler",
-            min_input_voltage="filler",
-            max_input_voltage="filler",
-            uart_ports_number="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            clock_requency=get_values.get_numeric_value(SearchParamEnum.CLOCK_FREQUENCY),
+            flash_memory_capacity=get_values.get_numeric_value(SearchParamEnum.FLASH_MEMORY_CAPACITY),
+            mounting=get_values.get_numeric_value(SearchParamEnum.MOUNTING),
+            min_input_voltage=get_values.get_numeric_value(SearchParamEnum.MIN_INPUT_VOLTAGE),
+            max_input_voltage=get_values.get_numeric_value(SearchParamEnum.MAX_INPUT_VOLTAGE),
+            uart_ports_number=get_values.get_numeric_value(SearchParamEnum.UART_PORTS_NUMBER),
         )
 
     @staticmethod
     def parse_rangefinder(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompRangeFinder:
+        get_values = GetValues(text_list)
         return CompRangeFinder(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            max_range="filler",
-            frequency="filler",
-            wave_length="filler",
-            power_supply="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            max_range=get_values.get_numeric_value(SearchParamEnum.MAX_RANGE),
+            frequency=get_values.get_numeric_value(SearchParamEnum.FREQUENCY),
+            wave_length=get_values.get_numeric_value(SearchParamEnum.WAVE_LENGTH),
+            power_supply=get_values.get_numeric_value(SearchParamEnum.POWER_SUPPLY),
         )
 
     @staticmethod
     def parse_satellitecommmodule(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompSatelliteCommModule:
+        get_values = GetValues(text_list)
         return CompSatelliteCommModule(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            battery_availability="filler",
-            battery_life="filler",
-            accuracy="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            battery_availability=get_values.get_numeric_value(SearchParamEnum.BATTERY_AVAILABILITY),
+            battery_life=get_values.get_numeric_value(SearchParamEnum.BATTERY_LIFE),
+            accuracy=get_values.get_numeric_value(SearchParamEnum.ACCURACY),
         )
 
     @staticmethod
     def parse_leashingplatform(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompLeashingPlatform:
+        get_values = GetValues(text_list)
         return CompLeashingPlatform(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            max_speed="filler",
-            gaining_speed="filler",
-            deceleration_speed="filler",
-            flight_range="filler",
-            flight_altitude="filler",
-            power_consumption="filler",
-            payload_weight="filler",
-            flight_time="filler",
-            screws_number="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            max_speed=get_values.get_numeric_value(SearchParamEnum.MAX_SPEED),
+            gaining_speed=get_values.get_numeric_value(SearchParamEnum.GAINING_SPEED),
+            deceleration_speed=get_values.get_numeric_value(SearchParamEnum.DECELERATION_SPEED),
+            flight_range=get_values.get_numeric_value(SearchParamEnum.FLIGHT_RANGE),
+            flight_altitude=get_values.get_numeric_value(SearchParamEnum.FLIGHT_ALTITUDE),
+            power_consumption=get_values.get_numeric_value(SearchParamEnum.POWER_CONSUMPTION),
+            payload_weight=get_values.get_numeric_value(SearchParamEnum.PAYLOAD_WEIGHT),
+            flight_time=get_values.get_numeric_value(SearchParamEnum.FLIGHT_TIME),
+            screws_number=get_values.get_numeric_value(SearchParamEnum.SCREWS_NUMBER),
         )
 
     @staticmethod
     def parse_thermalcamera(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompThermalCamera:
+        get_values = GetValues(text_list)
         return CompThermalCamera(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            range_detection="filler",
-            range_observation="filler",
-            interface="filler",
-            voltage="filler",
-            battery_availability="filler",
-            battery_life="filler",
-            field_of_view="filler",
-            magnification="filler",
-            protection_class="filler",
-            work_temperature="filler",
-            type_of_sensor="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            range_detection=get_values.get_numeric_value(SearchParamEnum),
+            range_observation=get_values.get_numeric_value(SearchParamEnum),
+            interface=get_values.get_numeric_value(SearchParamEnum),
+            voltage=get_values.get_numeric_value(SearchParamEnum),
+            battery_availability=get_values.get_numeric_value(SearchParamEnum),
+            battery_life=get_values.get_numeric_value(SearchParamEnum),
+            field_of_view=get_values.get_numeric_value(SearchParamEnum),
+            magnification=get_values.get_numeric_value(SearchParamEnum),
+            protection_class=get_values.get_numeric_value(SearchParamEnum),
+            work_temperature=get_values.get_numeric_value(SearchParamEnum),
+            type_of_sensor=get_values.get_numeric_value(SearchParamEnum),
         )
 
     @staticmethod
     def parse_uavcoptertype(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompUAVCopterType:
+        get_values = GetValues(text_list)
         return CompUAVCopterType(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            maximal_speed="filler",
-            gaining_speed="filler",
-            deceleration_speed="filler",
-            maximal_range="filler",
-            maximum_flight_altitude="filler",
-            power_consumption="filler",
-            payload_weight="filler",
-            flight_time="filler",
-            number_of_screws="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            maximal_speed=get_values.get_numeric_value(SearchParamEnum),
+            gaining_speed=get_values.get_numeric_value(SearchParamEnum),
+            deceleration_speed=get_values.get_numeric_value(SearchParamEnum),
+            maximal_range=get_values.get_numeric_value(SearchParamEnum),
+            maximum_flight_altitude=get_values.get_numeric_value(SearchParamEnum),
+            power_consumption=get_values.get_numeric_value(SearchParamEnum),
+            payload_weight=get_values.get_numeric_value(SearchParamEnum),
+            flight_time=get_values.get_numeric_value(SearchParamEnum),
+            number_of_screws=get_values.get_numeric_value(SearchParamEnum),
         )
 
     @staticmethod
     def parse_videotransmitter(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompVideoTransmitter:
+        get_values = GetValues(text_list)
         return CompVideoTransmitter(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            frequency="filler",
-            wattage="filler",
-            number_of_channels="filler",
-            antenna_connector="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            frequency=get_values.get_numeric_value(SearchParamEnum),
+            wattage=get_values.get_numeric_value(SearchParamEnum),
+            number_of_channels=get_values.get_numeric_value(SearchParamEnum),
+            antenna_connector=get_values.get_numeric_value(SearchParamEnum),
         )
 
     @staticmethod
     def parse_payload(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompPayload:
+        get_values = GetValues(text_list)
         return CompPayload(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            matrix="filler",
-            lens="filler",
-            magnification="filler",
-            number_of_megapixels="filler",
-            resolution_TVL="filler",
-            companion_image="filler",
-            thermal_imager_resolution="filler",
-            field_of_view="filler",
-            rangefinder="filler",
-            axes="filler",
-            accuracy="filler",
-            tangent="filler",
-            roll="filler",
-            yaw="filler",
-            wattage="filler",
-            voltage="filler",
-            current="filler",
-            antenna="filler",
-            frequency="filler",
-            number_of_channels="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            matrix=get_values.get_numeric_value(SearchParamEnum),
+            lens=get_values.get_numeric_value(SearchParamEnum),
+            magnification=get_values.get_numeric_value(SearchParamEnum),
+            number_of_megapixels=get_values.get_numeric_value(SearchParamEnum),
+            resolution_TVL=get_values.get_numeric_value(SearchParamEnum),
+            companion_image=get_values.get_numeric_value(SearchParamEnum),
+            thermal_imager_resolution=get_values.get_numeric_value(SearchParamEnum),
+            field_of_view=get_values.get_numeric_value(SearchParamEnum),
+            rangefinder=get_values.get_numeric_value(SearchParamEnum),
+            axes=get_values.get_numeric_value(SearchParamEnum),
+            accuracy=get_values.get_numeric_value(SearchParamEnum),
+            tangent=get_values.get_numeric_value(SearchParamEnum),
+            roll=get_values.get_numeric_value(SearchParamEnum),
+            yaw=get_values.get_numeric_value(SearchParamEnum),
+            wattage=get_values.get_numeric_value(SearchParamEnum),
+            voltage=get_values.get_numeric_value(SearchParamEnum),
+            current=get_values.get_numeric_value(SearchParamEnum),
+            antenna=get_values.get_numeric_value(SearchParamEnum),
+            frequency=get_values.get_numeric_value(SearchParamEnum),
+            number_of_channels=get_values.get_numeric_value(SearchParamEnum),
         )
 
     @staticmethod
     def parse_controlpanel(
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompControlPanel:
+        get_values = GetValues(text_list)
         return CompControlPanel(
-            url="filler",
-            image="filler",
-            price="filler",
-            name="filler",
-            frequency="filler",
-            number_of_channels="filler",
-            current="filler",
-            voltage="filler",
-            transmission_power="filler",
-            resolution="filler",
-            wireless_protocol="filler",
+            url=url,
+            image=image,
+            price=price,
+            name=name,
+            frequency=get_values.get_numeric_value(SearchParamEnum),
+            number_of_channels=get_values.get_numeric_value(SearchParamEnum),
+            current=get_values.get_numeric_value(SearchParamEnum),
+            voltage=get_values.get_numeric_value(SearchParamEnum),
+            transmission_power=get_values.get_numeric_value(SearchParamEnum),
+            resolution=get_values.get_numeric_value(SearchParamEnum),
+            wireless_protocol=get_values.get_numeric_value(SearchParamEnum),
         )
