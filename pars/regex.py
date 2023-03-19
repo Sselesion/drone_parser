@@ -8,7 +8,7 @@ class PtrnEnum(Enum):
     VOLTAGE = (r" напряжение[ а-я]*:? (\d+,?\d+)", 0)
     SHAPE = (r" размер[ а-я]*:? ([\d+[×XxхХ\]?\d+]+)", 0)
     CURRENT_DISCHARGE = (r" разряд тока:? (\d+) [м]?[А]", 0)
-    INTERFACE = r""
+    INTERFACE = (r"", 0)
 
 
     # CompUAVCopterType

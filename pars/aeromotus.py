@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 from models import *
 
-from .base import Parse
+from ._base import Parse
 from .regex import PtrnEnum, Regex
 
 
@@ -177,7 +177,6 @@ class AeromotusParser(Parse):
         if div_specification:
             text_list.append(div_specification.get_text(" ", strip=True))
 
-        regex = Regex(text_list)
-        print(">>>", regex.raw_text)
+        # regex = Regex(text_list)
 
-        return self.fabric[comp](url, image, price, name, regex)
+        return self.fabric[comp](url, image, price, name, text_list)
