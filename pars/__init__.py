@@ -2,7 +2,7 @@ from .aeromotus import AeromotusParser
 from models import CompEnum
 
 parsers = [
-    AeromotusParser,
+    AeromotusParser(),
 ]
 
 
