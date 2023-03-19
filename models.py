@@ -145,7 +145,7 @@ class CompUAVCopterType(Comp):
     power_consumption: str  # Энергопотребление (Вт/ч)
     payload_weight: str  # Масса полезной погрузки (г)
     flight_time: str  # Продолжительность полета (мин)
-    number_of_screws = int  # Число винтов
+    number_of_screws: int  # Число винтов
 
 
 class CompVideoTransmitter(Comp):
@@ -153,7 +153,7 @@ class CompVideoTransmitter(Comp):
 
     frequency: str  # Частота приема (ГГц)
     wattage: str  # Мощность (мВт)
-    number_of_channels = int  # Число каналов
+    number_of_channels: int  # Число каналов
     antenna_connector: str  # Разъем антенны
 
 
@@ -218,6 +218,10 @@ class SearchParamEnum(Enum):
     """Параметры, необходимые для запуска метода поиска значений в
     тексте (в модуле `pars._get_values`)"""
 
+    def __init__(self, key_words: list[str], units: list[str]) -> None:
+        self.key_words = key_words
+        self.units = units
+
     # Battery
     CURRENT_DISCHARGE = (
         ["разряд тока", "разряд", "ток разряда", "выходной ток", "ток выхода"],
@@ -235,7 +239,336 @@ class SearchParamEnum(Enum):
         ["напряжение"],
         ["в", "вольт", "v", "volt"],
     )
+    
+    #Microcontroller
+    OPERATING_FREQUENCY = (
+        ['частота'],
+        ['гц', 'ггц', 'мгц'],
+    )
+    NUMBER_OF_CHANNELS = (
+        ['каналов', "потоков"],
+        [],
+    )
+    OPERATING_CURRENTА = (
+        [],
+        [],
+    )
+    WORKING_VOLTAGE = (
+        ["напряжение"],
+        ["в", "вольт", "v", "volt"],
+    )
+    TRANSMISSION_POWER = (
+        ["мощность"],
+        ["дбм"],
+    )
+    CHANNEL_RESOLUTION = (
+        ["канал", "канала"],
+        [""],
+    )
+    WIRELESS_PROTOCOL = (
+        [],
+        [],
+    )
 
-    def __init__(self, key_words: list[str], units: list[str]) -> None:
-        self.key_words = key_words
-        self.units = units
+    # ElectricMotor
+    MAXIMUM_POWER = (
+        ["мощность"],
+        ["ватт", "вт"],
+    )
+    RECOMMENDED_BATTERY = (
+        [],
+        [],
+    )
+    NOLOAD_CURRENT = (
+        [],
+        [],
+    )
+    PEAK_CURRENT = (
+        [],
+        [],
+    )
+    STATOR_LENGTH = (
+        [],
+        [],
+    )
+    STATOR_DIAMETER = (
+        [],
+        [],
+    )
+    SHAFT_DIAMETER = (
+        [],
+        [],
+    )
+    NUMBER_OF_REVOLUTIONS_PER_VOLT = (
+        [],
+        [],
+    )
+    RESISTANCE = (
+        ["сопротивление"],
+        ["ом"],
+    )
+
+    # MotorController
+    OPERATING_CURRENT = (
+        ["ток"],
+        ["ампер", "а", "амп", "a"],
+    )
+    POWER_SUPPORT = (
+        [],
+        [],
+    )
+
+    # FlightController
+    PRESENCE_OF_A_BAROMETER = (
+        [],
+        [],
+    )
+    PRESENCE_OF_A_BLACK_BOX = (
+        [],
+        [],
+    )
+    POWER = (
+        ['питание', 'ток'],
+        ["в", "вольт", "v", "volt"],
+    )
+    FIRMWARE = (
+        [],
+        [],
+    )
+    PRESENCE_OF_A_USB_CONNECTOR = (
+        [],
+        [],
+    )
+    FASTENING = (
+        [],
+        [],
+    )
+
+    # Lidar
+    MAX_RANGE = (
+        ['дальность', 'расстояние'],
+        ['м', 'км', 'метров', 'километров'],
+    )
+    FREQUENCY = (
+        ['частота'],
+        ['гц', 'ггц', 'мгц'],
+    )
+    POWER_SUPPLY = (
+        ['питание', 'ток'],
+        ["в", "вольт", "v", "volt"],
+    )
+
+    # MicroFlightController
+
+    CLOCK_FREQUENCY = (
+        ['частота', 'тактовая'],
+        ['гц', 'ггц', 'мгц'],
+    )
+    FLASH_MEMORY_CAPACITY = (
+        ['память', 'памяти'],
+        ['кб', 'мб', 'кбайт', 'мбайт', 'байт'],
+    )
+    MOUNTING = (
+        ["крепление"],
+        ["мм", "см"],
+    )
+    MIN_INPUT_VOLTAGE = (
+        ["минимальное", "входное"],
+        ["в", "вольт", "v", "volt"]
+    )
+    MAX_INPUT_VOLTAGE = (
+        ["максимальное", "входное"],
+        ["в", "вольт", "v", "volt"]
+    )
+    UART_PORTS_NUMBER = (
+        ["uart"],
+        [],
+    )
+
+    # Rangefinder
+
+    WAVE_LENGTH = (
+        ["волны", "волна"],
+        ["нм"],
+    )
+
+    # Satellitecommmodule
+    BATTERY_LIFE = (
+        ["время", "работы"],
+        ["мин", "минут", "часов"],
+    )
+    ACCURACY = (
+        ["погрешность", "точность"],
+        [],
+    )
+
+    # Leashingplatform
+    MAX_SPEED = (
+        [],
+        [],
+    )
+    FLIGHT_RANGE = (
+        [],
+        [],
+    )
+    FLIGHT_ALTITUDE = (
+        [],
+        [],
+    )
+    PAYLOAD_WEIGHT = (
+        [],
+        [],
+    )
+    FLIGHT_TIME = (
+        [],
+        [],
+    )
+    SCREWS_NUMBER = (
+        [],
+        [],
+    )
+
+    # TermalCamera
+    RANGE_DETECTION = (
+        ["дальность", "обнаружения", "видимости", "сканирования", "видимость"],
+        ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
+    )
+    RANGE_OBSERVATION = (
+        ["дистанция наблюдения", "дистанция"],
+        ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
+    )
+    INTERFACE = (
+        ["интерфейс"],
+        ["удобный", "улучшенный", "пользовательский"]
+    )
+    BATTERY_AVAILABILITY = (
+        ["батарея", "аккумулятор", "аккумуляторная"],
+        ["вт/ч", "w/h"]
+    )
+    FIELD_OF_VIEW = (
+        ["поле", "зрения"],
+        ["градусов", "гр.", "°"]
+    )
+    MAGNIFICATION = (
+        ["увеличение", "зум", "zoom"],
+        ["x", "X"]
+    )
+    PROTECTION_CLASS = (
+        ["защиты", "защита", "класс", "влаги"],
+        ["x", "1", "2", "3", "4", "5", "6", "7", "8", "9",]
+    )
+    WORK_TEMPERATURE = (
+        ["рабочая", "температура", "класс", "влаги"],
+        ["градусов", "гр.", "°"]
+
+    )
+    TYPE_OF_SENSOR = (
+        ["тип", "сенсор", "sensor"],
+        []
+    )
+
+    #UAVCopterType
+    MAXIMAL_SPEED = (
+        ["максимальная скорость", "макс. скорость", "скорость"],
+        ["км/ч"]
+    )
+    GAINING_SPEED = (
+        ["скорость набора"],
+        ["км/ч"]
+    )
+    DECELERATION_SPEED = {
+        ["скорость cнижения"],
+        ["км/ч"]
+    }
+    MAXIMAL_RANGE = (
+        ["дальность полета", "дальность"],
+        ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
+    )
+    MAXIMUM_FLIGHT_ALTITUDE = (
+        ["высота полета", "высота"],
+        ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
+    )
+    POWER_CONSUMPTION = (
+        ["энергопотребление", "потребление"],
+        ["вт/ч", "w/h"]
+    )
+    NUMBER_OF_SCREWS = (
+        ["число винтов", "винты", "винтов"],
+        [""]
+    )
+
+    #VideoTransmitter
+    WATTAGE = (
+        ["мощность"],
+        ["мвт", "вт"]
+    )
+
+    ANTENNA_CONNECTOR = (
+        ["разъем антены", "антена"],
+        []
+    )
+
+    #Payload
+    MATRIX = (
+        ["матрица"],
+        []
+    )
+    LENS = (
+        ["объектив"],
+        []
+    )
+    NUMBER_OF_MEGAPIXELS = (
+        ["число мегапикселей", "мегапикселей"],
+        []
+    )
+    RESOLUTION_TVL = (
+        ["разрешение"],
+        []
+    )
+    COMPANION_IMAGE = (
+        ["сопровождение"],
+        []
+    )
+    THERMAL_IMAGER_RESOLUTION = (
+        ["разрешение", "разрешение тепловизора"],
+        []
+    )
+    RANGEFINDER = (
+        ["дальномер"],
+        []
+    )
+    AXES = (
+        ["оси стабилизации", "оси", "число осей"],
+        []
+    )
+    
+    TANGENT = (
+        ["углы стабилизации", "тангаж", "угол стабилизации"],
+        []
+    )
+    ROLL = (
+        ["углы стабилизации", "крен"],
+        []
+    )
+    YAW = (
+        ["углы стабилизации", "рысканье"],
+        []
+    )
+    CURRENT = (
+        ["ток"],
+        ["ма", "а"]
+    )
+    ANTENNA = (
+        ["антенна"],
+        []
+    )
+    
+    #ControlPanel
+    
+    RESOLUTION = (
+        ["разрешение", "разрешение канала"],
+        []
+    )
+    
+
+

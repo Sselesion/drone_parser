@@ -14,6 +14,13 @@ from ._base import Parse
 
 class AeromotusParser(Parse):
     def __init__(self) -> None:
+        """Инициализирует экземпляр класса AeromotusParser
+
+        Args:
+            
+        Returns:
+
+        """
         super().__init__(url="https://aeromotus.ru/", idx=0)
 
         self.request_fabric = {
@@ -120,11 +127,21 @@ class AeromotusParser(Parse):
         }
 
     def run(self, comp: CompEnum) -> dict[str, Comp]:
+        """Запускает Поиск
+
+        Args:
+            comp: Экземпляр класса CompEnum
+
+        Returns:
+            Словарь [url удовлетворяющего товара, экземляр класса Comp после парсинга]
+        """
         result = {}
         response = requests.get(*self.request_fabric[comp])
         time.sleep(randint(1, 4))
 
         soup = BeautifulSoup(response.text, "html.parser")
+
+        # Получение количества страниц по запросу
         nav = soup.find("nav", class_="electro-advanced-pagination")
         pages = int(nav.text.split()[-1][:-1]) if nav and nav.text else 0
         for page in range(1, pages + 1):
@@ -135,21 +152,35 @@ class AeromotusParser(Parse):
             )
             time.sleep(randint(1, 4))
 
+            # Итерация по url карточек, которые прошли проверку на соответсвие 
             for card_url in self.detect_cards(response.text, self.key_words[comp]):
                 result.update({card_url: self.parse_card(card_url, comp).dict()})
         return result
 
     def detect_cards(self, html_text: str, key_words: list) -> list[str]:
+        """Определение подходящих карточек по ключевым словам в названии
+
+        Args:
+            html_text: Текст HTML-страницы
+            key_words: Ключевые слова
+
+        Returns:
+            Список подходящих url адресов карточек
+        """
         url_list = []
         soup = BeautifulSoup(html_text, "html.parser")
+
         for li in soup.find_all("li", class_="product"):
+            # Получение заголовков карточек
             h2 = li.find("h2", class_="woocommerce-loop-product__title")
+            # Итерация по ключевым словам
             if not key_words:
                 a = li.find("a", class_="woocommerce-LoopProduct-link")
                 url_list.append(a.get("href"))
             else:
                 for key_word in key_words:
                     for word in h2.string.lower().split():
+                    # Точное соответсвие слова в названии
                         if key_word == word:
                             a = li.find("a", class_="woocommerce-LoopProduct-link")
                             url_list.append(a.get("href"))
@@ -157,10 +188,20 @@ class AeromotusParser(Parse):
         return url_list
 
     def parse_card(self, url: str, comp: CompEnum) -> Comp:
+        """Парсинг характеристик карточки
+
+        Args:
+            url: URL адрес карточки
+            comp: экземпляр перечесления CompEnum. Служит для вызова определенной функции parse
+
+        Returns:
+            Объект типа Comp
+        """
         response = requests.get(url)
         time.sleep(randint(1, 4))
         soup = BeautifulSoup(response.text, "html.parser")
 
+        # Получение изображения, цены, названия товара
         img = soup.find("img", class_="wp-post-image")
         image = img.get("src")
         p = soup.find("p", class_="price")
@@ -168,6 +209,7 @@ class AeromotusParser(Parse):
         h1 = soup.find("h1", class_="product_title")
         name = h1.string
 
+        # Получение разделов "Описание" и "Характеристики"
         text_list = []
         div_description = soup.find("div", id="tab-description")
         if div_description:
