@@ -193,7 +193,6 @@ class AirHobbyParser(Parse):
         
         for div in cards.find_all("div", class_="v_item-i"):
             name = div.find("a", class_="v_item-it")
-            print(name.get("href"))
             if not key_words:
                 url_list.append(self.url + name.get("href"))
             else:
