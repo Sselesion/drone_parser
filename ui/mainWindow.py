@@ -1,22 +1,24 @@
-import logging
-import sys
+import sys, logging
+from ui.appLoggerWidget import LoggerWidget
 
-from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtGui import QAction, QIcon, QFont
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QCheckBox,
-    QGridLayout,
+    QWidget,
     QHBoxLayout,
     QMainWindow,
+    QTableWidget,
+    QGridLayout,
+    QCheckBox,
+    QVBoxLayout,
     QPushButton,
     QSizePolicy,
-    QTableWidget,
-    QVBoxLayout,
-    QWidget,
+    QLabel,
+    QTextEdit,
+    QDialogButtonBox,
+    QDialog,
+    QMessageBox,
 )
-
-from ui.appLoggerWidget import LoggerWidget
-import get_excel
-import pars
 
 
 class MainWindow(QWidget):
@@ -26,18 +28,17 @@ class MainWindow(QWidget):
         :param login:
         """
         super(MainWindow, self).__init__()
-        self.parsed_data = {}
+
         # window properties
-        self.setWindowTitle("Поиск комплектующих для БПЛА")
+        self.setWindowTitle("Парсер комплектующих БПЛА")
         # self.setWindowIcon(QIcon(r'')) todo
-        self.resize(1000, 600)
+        # self.resize(600, 600)
+        self.setFixedSize(400, 600)
 
         # setting layouts
         #  sites check boxes:
         self.listCheckBox = [
             "aeromotus.ru",
-            "air-hobby.ru",
-            "mydrone.ru",
         ]
         GridCB = QGridLayout()
         for i, v in enumerate(self.listCheckBox):
@@ -57,24 +58,42 @@ class MainWindow(QWidget):
 
         vLayout = QVBoxLayout()
 
+        VLayoutHead = QVBoxLayout()
         hLayoutMain = QHBoxLayout()
         hLayoutFooter = QHBoxLayout()
+
+        #  title
+        header_label = QLabel("Поиск комплектующих для БПЛА")
+        header_label.setFont(QFont("Arial", 18))
+        header_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        #  descr
+        description_label = QTextEdit(
+            "Описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание"
+        )
+        description_label.setFont(QFont("Arial", 14))
+        description_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+        description_label.setReadOnly(True)
+        # header layout
+        VLayoutHead.addWidget(header_label)
+        VLayoutHead.addWidget(description_label)
+
+        vLayout.addLayout(VLayoutHead)
 
         #  main h layout
         hLayoutMain.addLayout(GridCB)
         # hLayoutMain.addLayout(FeaturLayout) todo
-        self.loggerWidget = LoggerWidget()
-        hLayoutMain.addWidget(self.loggerWidget)
+        # self.loggerWidget = LoggerWidget()
+        # hLayoutMain.addWidget(self.loggerWidget)
 
         vLayout.addLayout(hLayoutMain)
 
         #  footer h layout
         hLayoutFooter.addWidget(hSpacer)
 
-        self.parseBtn = QPushButton("ЗАПУСК ПОИСКА ДАННЫХ")
+        self.parseBtn = QPushButton("Спарсить")
         hLayoutFooter.addWidget(self.parseBtn)
 
-        self.saveBtn = QPushButton("Экспорт данных в EXCEL")
+        self.saveBtn = QPushButton("Сохранить")
         hLayoutFooter.addWidget(self.saveBtn)
 
         vLayout.addLayout(hLayoutFooter)
@@ -86,26 +105,48 @@ class MainWindow(QWidget):
         self._createAction()
 
     def _createAction(self):
-        self.parseBtn.clicked.connect(self._startParsing)
-        self.saveBtn.clicked.connect(self._save)
+        ...
+
+    # self.parseBtn.clicked.connect(self._startParsing)
+    # self.saveBtn.clicked.connect(self._save)
 
     def _save(self):
-        if not self.parsed_data:
-            self.loggerWidget.error(
-                "Для начала необходимо провести поиск комплектующих. Выберите сайты, отметив их чекбоксами и нажмите на кнопку 'ЗАПУСК ПОИСКА ДАННЫХ'"
-            )
+        self.ShowDialog("asdasda")
+        self.loggerWidget.error("implement me!!")
+
+    def ShowDialog(self, text: str):
+        """
+        Shows some msg to user
+        """
+        dlg = QMessageBox(self)
+        dlg.setWindowTitle("Сообщение")
+        dlg.setText(text)
+        dlg.setStandardButtons(
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        )
+        dlg.setIcon(QMessageBox.Icon.Question)
+        button = dlg.exec()
+
+        if button == QMessageBox.StandardButton.Yes:
+            print("Да")
         else:
-            get_excel.make(self.parsed_data)
+            print("Нет")
+        # if button == QMessageBox.standardButton:
+        #     print("OK!")
 
     def _startParsing(self):
         parsing_sites_ids = []
+        parsing_sites_url = []
         for i, v in enumerate(self.listCheckBox):
             if v.isChecked():
                 parsing_sites_ids.append(i)
-        pars.parse(parsing_sites_ids)
-
+                parsing_sites_url.append(v.text())
         if len(parsing_sites_ids) == 0:
-            self.loggerWidget.error("Вы не выбрали ни один из сайтов!")
+            self.loggerWidget.error("Nothing to parse")
             return
-
         self.loggerWidget.info(str(parsing_sites_ids))
+        # self.loggerWidget.info("parsing sites ids:" +
+        #                        " ".join(str(id) for id in parsing_sites_ids) +
+        #                        "\tparsing sites urls:" +
+        #                        " ".join(str(url) for url in parsing_sites_url))
+

@@ -1,5 +1,4 @@
-from enum import Enum, auto
-from dataclasses import dataclass
+from enum import Enum
 
 from pydantic import BaseModel
 
@@ -138,81 +137,81 @@ class CompThermalCamera(Comp):
 class CompUAVCopterType(Comp):
     """БПЛА коптерного типа"""
 
-    maximal_speed = str  # Максимальная скорость (км/ч)
-    gaining_speed = str  # Скорость набора (км/ч)
-    deceleration_speed = str  # Скорость снижения (км/ч)
-    maximal_range = str  # Максимальная дальность полета (м)
-    maximum_flight_altitude = str  # Максимальная дальность полета (м)
-    power_consumption = str  # Энергопотребление (Вт/ч)
-    payload_weight = str  # Масса полезной погрузки (г)
-    flight_time = str  # Продолжительность полета (мин)
+    maximal_speed: str  # Максимальная скорость (км/ч)
+    gaining_speed: str  # Скорость набора (км/ч)
+    deceleration_speed: str  # Скорость снижения (км/ч)
+    maximal_range: str  # Максимальная дальность полета (м)
+    maximum_flight_altitude: str  # Максимальная дальность полета (м)
+    power_consumption: str  # Энергопотребление (Вт/ч)
+    payload_weight: str  # Масса полезной погрузки (г)
+    flight_time: str  # Продолжительность полета (мин)
     number_of_screws = int  # Число винтов
 
 
 class CompVideoTransmitter(Comp):
     """Видео передатчик"""
 
-    frequency = str  # Частота приема (ГГц)
-    wattage = str  # Мощность (мВт)
+    frequency: str  # Частота приема (ГГц)
+    wattage: str  # Мощность (мВт)
     number_of_channels = int  # Число каналов
-    antenna_connector = str  # Разъем антенны
+    antenna_connector: str  # Разъем антенны
 
 
 class CompPayload(Comp):
     """Полезная нагрузка (подвес, который прикрепляется к коптеру)"""
 
-    matrix = str  # Матрица
-    lens = str  # Объектив
-    magnification = str  # Увеличение
-    number_of_megapixels = str  # Число мегапикселей
-    resolution_TVL = str  # Разрешение, TVL
-    companion_image = str  # Сопровождение
-    thermal_imager_resolution = str  # Разрешение тепловизора
-    field_of_view = str  # Поле зрения
-    rangefinder = str  # Дальномер
-    axes = str  # Число осей стабилизации
-    accuracy = str  # Точность
-    tangent = str  # Рабочие углы стабилизации, Тангаж
-    roll = str  # Рабочие углы стабилизации, Крен
-    yaw = str  # Рабочие углы стабилизации, Рысканье
-    wattage = str  # Мощность (мВт)
-    voltage = str  # Питание (Вольт)
-    current = str  # Ток (мА)
-    antenna = str  # Антенна (при наличии указать название)
-    frequency = str  # Частота (ГГц)
-    number_of_channels = str  # Число каналов
+    matrix: str  # Матрица
+    lens: str  # Объектив
+    magnification: str  # Увеличение
+    number_of_megapixels: str  # Число мегапикселей
+    resolution_TVL: str  # Разрешение, TVL
+    companion_image: str  # Сопровождение
+    thermal_imager_resolution: str  # Разрешение тепловизора
+    field_of_view: str  # Поле зрения
+    rangefinder: str  # Дальномер
+    axes: str  # Число осей стабилизации
+    accuracy: str  # Точность
+    tangent: str  # Рабочие углы стабилизации, Тангаж
+    roll: str  # Рабочие углы стабилизации, Крен
+    yaw: str  # Рабочие углы стабилизации, Рысканье
+    wattage: str  # Мощность (мВт)
+    voltage: str  # Питание (Вольт)
+    current: str  # Ток (мА)
+    antenna: str  # Антенна (при наличии указать название)
+    frequency: str  # Частота (ГГц)
+    number_of_channels: str  # Число каналов
 
 
 class CompControlPanel(Comp):
     """Пульт управления (control panel)"""
 
-    frequency = str  # Рабочая частота (ГГц)
-    number_of_channels = str  # Число каналов
-    current = str  # Рабочий ток (мА)
-    voltage = str  # Рабочее напряжение (Вольт)
-    transmission_power = str  # Мощность передачи (дБм)
-    resolution = str  # Разрешение канала
-    wireless_protocol = str  # Беспроводной протокол
+    frequency: str  # Рабочая частота (ГГц)
+    number_of_channels: str  # Число каналов
+    current: str  # Рабочий ток (мА)
+    voltage: str  # Рабочее напряжение (Вольт)
+    transmission_power: str  # Мощность передачи (дБм)
+    resolution: str  # Разрешение канала
+    wireless_protocol: str  # Беспроводной протокол
 
 
 class CompEnum(Enum):
     """Перечисления компонентов"""
 
-    BATTERY = auto()
-    MICROCONTROLLER = auto()
-    ELECTRICMOTOR = auto()
-    MOTORCONTROLLER = auto()
-    FLIGHTCONTROLLER = auto()
-    LIDAR = auto()
-    MICROFLIGHTCONTROLLER = auto()
-    RANGEFINDER = auto()
-    SATELLITECOMMMODULE = auto()
-    LEASHINGPLATFORM = auto()
-    THERMALCAMERA = auto()
-    UAVCOPTERTYPE = auto()
-    VIDEOTRANSMITTER = auto()
-    PAYLOAD = auto()
-    CONTROLPANEL = auto()
+    BATTERY = "Батарея"
+    MICROCONTROLLER = "Микроконтроллер"
+    ELECTRICMOTOR = "Мотор"
+    MOTORCONTROLLER = "Контроллер мотора"
+    FLIGHTCONTROLLER = "Полетный контроллер"
+    LIDAR = "Лидар"
+    MICROFLIGHTCONTROLLER = "Полетный микроконтроллер"
+    RANGEFINDER = "Дальномер"
+    SATELLITECOMMMODULE = "Модуль спутниковой связи"
+    LEASHINGPLATFORM = "Привязная платформа"
+    THERMALCAMERA = "Тепловизор"
+    UAVCOPTERTYPE = "БПЛА коптерного типа"
+    VIDEOTRANSMITTER = "Видеопередатчик"
+    PAYLOAD = "Полезная нагрузка (для подвеса)"
+    CONTROLPANEL = "Пульт управления"
 
 
 class SearchParamEnum(Enum):
