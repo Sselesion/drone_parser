@@ -14,7 +14,10 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QSizePolicy,
     QLabel,
-    QTextEdit
+    QTextEdit,
+    QDialogButtonBox,
+    QDialog,
+    QMessageBox
 )
 
 
@@ -100,13 +103,31 @@ class MainWindow(QWidget):
         # actions
         self._createAction()
 
-    def _createAction(self):
-        self.parseBtn.clicked.connect(self._startParsing)
-        self.saveBtn.clicked.connect(self._save)
+
+    def _createAction(self): ...
+        # self.parseBtn.clicked.connect(self._startParsing)
+        # self.saveBtn.clicked.connect(self._save)
 
     def _save(self):
         self.loggerWidget.error('implement me!!')
 
+    def ShowDialog(self, text: str):
+        """
+        Shows some msg to user
+        """
+        dlg = QMessageBox(self)
+        dlg.setWindowTitle("Сообщение")
+        dlg.setText(text)
+        dlg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        dlg.setIcon(QMessageBox.Icon.Question)
+        button = dlg.exec()
+
+        if button == QMessageBox.StandardButton.Yes:
+            print("Yes!")
+        else:
+            print("No!")
+        # if button == QMessageBox.standardButton:
+        #     print("OK!")
     def _startParsing(self):
         parsing_sites_ids = []
         parsing_sites_url = []
