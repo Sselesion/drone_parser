@@ -22,7 +22,7 @@ class PtrnEnum(Enum):
     FLIGHT_TIME = (r" [е|ё]мкость[ а-я]*:? (\d+)", 0)
     NUMBER_OF_SCREWS = (r" [е|ё]мкость[ а-я]*:? (\d+)", 0)
 
-    def __init__(self, reg: str, n_group: int) -> None:
+    def __init__(self, reg: str, n_group: int=0) -> None:
         self.reg = reg
         self.n_group = n_group
 

@@ -30,9 +30,9 @@ class Parse(ABC):
             # КОМПОНЕНТ -> КЛЮЧЕВЫЕ СЛОВА В НАЗВАНИИ КАРТОЧЕК C ТОВАРОМ
             CompEnum.BATTERY: ["аккумулятор", "батарея"],
             CompEnum.MICROCONTROLLER: [],
-            CompEnum.ELECTRICMOTOR: [],
+            CompEnum.ELECTRICMOTOR: ["электромотор", "мотор"],
             CompEnum.MOTORCONTROLLER: [],
-            CompEnum.FLIGHTCONTROLLER: [],
+            CompEnum.FLIGHTCONTROLLER: ['полетный', 'полётный'],
             CompEnum.LIDAR: [],
             CompEnum.MICROFLIGHTCONTROLLER: [],
             CompEnum.RANGEFINDER: [],
