@@ -1,21 +1,42 @@
 # Универсальный парсер для комплектующих БпЛА
 
-### Клонировние проекта на рабочий компьютер
+### При Клонировние проекта через Git
 ```bash
 git clone git@github.com:Sselesion/drone_parser.git
 ```
 
-## Для Linux:
-### Создание виртуального окружения
+
+
+### Перейти в дерикторию проекта
 ```bash
-python 3 -m venv env
+cd drone_parser/
 ```
+### Создание виртуального окружения
+## Для Linux:
+```bash
+python3 -m venv env
+```
+## Для Windows:
+```bash
+python -m venv env
+```
+
+### Активация виртуального окружения
+## Для Linux:
+```bash
+source env/bin/activate
+```
+## Для Windows:
+```bash
+env\Scripts\activate.bat
+```
+
 ### Установка зависимостей проекта
 ```bash
 pip install -r requirements.txt
 ```
 ### Запуск
 ```bash
-python 3 run.py
+python3 run.py
 ```
 

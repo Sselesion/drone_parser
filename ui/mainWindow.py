@@ -64,10 +64,12 @@ class MainWindow(QWidget):
         header_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         #  descr
         description_label = QTextEdit(
-            "Описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание"
+            "Данная программа осуществляет поиск комплектующих для БпЛА. Необходимо выбрать сайты, в которых будет осуществляться поиск.\
+            Нажатие на кнопку \"ЗАПУСТИТЬ ПОИСК\" осуществлит поиск комплектующих.\
+            Нажатие на кнопку \"ВЫГРУЗИТЬ EXCEL файл\" осуществлит выгрузку комплектующих в Excel."
         )
-        description_label.setFont(QFont("Arial", 14))
-        description_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+        description_label.setFont(QFont("Tahoma", 12))
+        description_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
         description_label.setReadOnly(True)
         # header layout
         VLayoutHead.addWidget(header_label)
