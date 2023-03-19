@@ -408,14 +408,6 @@ class SearchParamEnum(Enum):
         [],
         [],
     )
-    GAINING_SPEED = (
-        [],
-        [],
-    )
-    DECELERATION_SPEED = (
-        [],
-        [],
-    )
     FLIGHT_RANGE = (
         [],
         [],
@@ -481,6 +473,14 @@ class SearchParamEnum(Enum):
         ["максимальная скорость", "макс. скорость", "скорость"],
         ["км/ч"]
     )
+    GAINING_SPEED = (
+        ["скорость набора"],
+        ["км/ч"]
+    )
+    DECELERATION_SPEED = {
+        ["скорость cнижения"],
+        ["км/ч"]
+    }
     MAXIMAL_RANGE = (
         ["дальность полета", "дальность"],
         ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
