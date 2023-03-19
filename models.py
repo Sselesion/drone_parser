@@ -53,9 +53,7 @@ class CompFlightController(Comp):
     power: str  # Питание (Вольт);
     firmware: str  # Прошивка (название);
     presence_of_a_usb_connector: str  # Наличие usb разъема;
-    fastening: list[
-        str
-    ]  # Крепление (посадочное место для крепления. Здесь нужно расстояние между отверстиями т.е. 40мм*50мм);
+    fastening: list  # Крепление (посадочное место для крепления. Здесь нужно расстояние между отверстиями т.е. 40мм*50мм);
 
 
 class CompLidar(Comp):
@@ -68,7 +66,7 @@ class CompMicroFlightController(Comp):
     clock_requency: str  # Тактовая частота (МГц)
     flash_memory_capacity: str  # Объем флеш памяти (Кб)
     # посадочное место для крепления (расстояние между отверстиями т.е. 40мм*50мм)
-    mounting: list[str]
+    mounting: list
     min_input_voltage: str  # Минимальное входное напряжение (Вольт)
     max_input_voltage: str  # Максимальное входное напряжение (Вольт)
     uart_ports_number: str  # Число UART портов
