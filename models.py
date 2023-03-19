@@ -12,6 +12,8 @@ class Comp(BaseModel):
 
 
 class CompBattery(Comp):
+    """Батарея (аккумулятор)"""
+
     current_discharge: str  # Разряд тока (Ампер);
     capasity: str  # Емкость (мА/ч);
     shape: str  # Форм фактор (длина * ширина * высота);
@@ -19,6 +21,8 @@ class CompBattery(Comp):
 
 
 class CompMicrocontroller(Comp):
+    """Микроконтроллер"""
+
     operating_frequency: str  # Рабочая частота (ГГц);
     number_of_channels: str  # Число каналов;
     operating_current: str  # Рабочий ток (мАмпер);
@@ -29,6 +33,8 @@ class CompMicrocontroller(Comp):
 
 
 class CompElectricMotor(Comp):
+    """Электрический мотор (применяемые для БПЛА)"""
+
     voltage: str  # Напряжение (Вольт);
     maximum_power: str  # Максимальная мощность (Ватт);
     recommended_battery: str  # Рекомендуемая батарея (название модели или ссылка);
@@ -42,12 +48,16 @@ class CompElectricMotor(Comp):
 
 
 class CompMotorController(Comp):
+    """Контроллер мотора"""
+
     operating_current: str  # Рабочий ток (Ампер);
     peak_current: str  # Пиковый ток (Ампер);
     power_support: bool  # Поддержка питания (Да/Нет);
 
 
 class CompFlightController(Comp):
+    """Полетный контролер"""
+
     presence_of_a_barometer: bool  # Наличие барометра;
     presence_of_a_black_box: bool  # Наличие черного ящика;
     power: str  # Питание (Вольт);
@@ -59,12 +69,16 @@ class CompFlightController(Comp):
 
 
 class CompLidar(Comp):
+    """Лидар"""
+
     max_range: str  # Максимальная дальность использования (метров)
     frequency: str  # Частота импульсов (Герц)
     power_supply: str  # Питание (вольт)
 
 
 class CompMicroFlightController(Comp):
+    """Микроконтроллер (полетный контроллер)"""
+
     clock_requency: str  # Тактовая частота (МГц)
     flash_memory_capacity: str  # Объем флеш памяти (Кб)
     # посадочное место для крепления (расстояние между отверстиями т.е. 40мм*50мм)
@@ -75,6 +89,8 @@ class CompMicroFlightController(Comp):
 
 
 class CompRangeFinder(Comp):
+    """Дальномер"""
+
     max_range: str  # Максимальная дальность использования (метров)
     frequency: str  # Частота работы (Гц)
     wave_length: str  # Длина волны (нм)
@@ -82,12 +98,16 @@ class CompRangeFinder(Comp):
 
 
 class CompSatelliteCommModule(Comp):
+    """Модуль спутниковой связи"""
+
     battery_availability: bool  # Наличие батареи
     battery_life: str  # Время работы от батареи (часов)
     accuracy: str  # Погрешность (м)
 
 
 class CompLeashingPlatform(Comp):
+    """Привязная платформа"""
+
     max_speed: str  # Максимальная скорость (км/ч)
     gaining_speed: str  # Скорость набора высоты (км/ч)
     deceleration_speed: str  # Скорость снижения (км/ч)
@@ -100,6 +120,8 @@ class CompLeashingPlatform(Comp):
 
 
 class CompThermalCamera(Comp):
+    """Тепловизор"""
+
     range_detection: str  # Дальность обнаружения (м)
     range_observation: str  # Дистанция наблюдения (м)
     interface: str  # Интерфейс
@@ -114,6 +136,8 @@ class CompThermalCamera(Comp):
 
 
 class CompUAVCopterType(Comp):
+    """БПЛА коптерного типа"""
+
     maximal_speed = str  # Максимальная скорость (км/ч)
     gaining_speed = str  # Скорость набора (км/ч)
     deceleration_speed = str  # Скорость снижения (км/ч)
@@ -126,6 +150,8 @@ class CompUAVCopterType(Comp):
 
 
 class CompVideoTransmitter(Comp):
+    """Видео передатчик"""
+
     frequency = str  # Частота приема (ГГц)
     wattage = str  # Мощность (мВт)
     number_of_channels = int  # Число каналов
@@ -133,6 +159,8 @@ class CompVideoTransmitter(Comp):
 
 
 class CompPayload(Comp):
+    """Полезная нагрузка (подвес, который прикрепляется к коптеру)"""
+
     matrix = str  # Матрица
     lens = str  # Объектив
     magnification = str  # Увеличение
@@ -156,6 +184,8 @@ class CompPayload(Comp):
 
 
 class CompControlPanel(Comp):
+    """Пульт управления (control panel)"""
+
     frequency = str  # Рабочая частота (ГГц)
     number_of_channels = str  # Число каналов
     current = str  # Рабочий ток (мА)
@@ -166,6 +196,8 @@ class CompControlPanel(Comp):
 
 
 class CompEnum(Enum):
+    """Перечисления компонентов"""
+
     BATTERY = auto()
     MICROCONTROLLER = auto()
     ELECTRICMOTOR = auto()
