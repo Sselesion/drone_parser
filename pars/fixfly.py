@@ -9,7 +9,6 @@ from pydantic import BaseModel
 from models import *
 
 from ._base import Parse
-from .regex import PtrnEnum, Regex
 
 
 class FixFlyParser(Parse):
