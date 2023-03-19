@@ -12,9 +12,11 @@ from .base import Parse
 from .regex import PtrnEnum, Regex
 
 
+
 class AeromotusParser(Parse):
     def __init__(self) -> None:
         super().__init__(url="https://aeromotus.ru/", idx=0)
+
         self.request_fabric = {
             # КОМПОНЕНТ -> URL && ПАРАМЕТРЫ ЗАПРОСА
             CompEnum.BATTERY: (
@@ -117,6 +119,10 @@ class AeromotusParser(Parse):
                 },
             ),
         }
+        self.key_words = {
+            CompEnum.BATTERY: ["аккумулятор", "батарея"],
+            CompEnum.UAVCOPTERTYPE: [],
+        }
 
     def run(self, comp: CompEnum) -> dict[str, Comp]:
         result = {}
@@ -127,6 +133,7 @@ class AeromotusParser(Parse):
         nav = soup.find("nav", class_="electro-advanced-pagination")
         pages = int(nav.text.split()[-1][:-1]) if nav and nav.text else 0
         for page in range(1, pages + 1):
+            
             response = requests.get(
                 self.request_fabric[comp][0] + f"page/{page}/",
                 self.request_fabric[comp][1],
@@ -175,6 +182,7 @@ class AeromotusParser(Parse):
             text_list.append(div_specification.get_text(" ", strip=True))
 
         regex = Regex(text_list)
+        print(">>>", regex.raw_text)
 
         return self.fabric[comp](url, image, price, name, regex)
 
@@ -191,6 +199,7 @@ class AeromotusParser(Parse):
             shape=regex.find_by(PtrnEnum.SHAPE),
             voltage=regex.find_by(PtrnEnum.VOLTAGE),
         )
+
 
     def parse_microcontroller(
         self, url: str, image: str, price: str, name: str, tiplyakov: Type
@@ -433,3 +442,4 @@ class AeromotusParser(Parse):
             resolution="filler",
             wireless_protocol="filler",
         )
+
