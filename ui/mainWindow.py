@@ -1,7 +1,8 @@
 import sys, logging
 from ui.appLoggerWidget import LoggerWidget
 
-from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtGui import QAction, QIcon, QFont
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QWidget,
     QHBoxLayout,
@@ -11,7 +12,9 @@ from PyQt6.QtWidgets import (
     QCheckBox,
     QVBoxLayout,
     QPushButton,
-    QSizePolicy
+    QSizePolicy,
+    QLabel,
+    QTextEdit
 )
 
 
@@ -27,7 +30,8 @@ class MainWindow(QWidget):
         # window properties
         self.setWindowTitle("Парсер комплектующих БПЛА")
         # self.setWindowIcon(QIcon(r'')) todo
-        self.resize(1200, 600)
+        # self.resize(600, 600)
+        self.setFixedSize(400, 600)
 
         # setting layouts
         #  sites check boxes:
@@ -51,14 +55,30 @@ class MainWindow(QWidget):
 
         vLayout = QVBoxLayout()
 
+        VLayoutHead = QVBoxLayout()
         hLayoutMain = QHBoxLayout()
         hLayoutFooter = QHBoxLayout()
+
+        #  title
+        header_label = QLabel("Поиск комплектующих для БПЛА")
+        header_label.setFont(QFont("Arial", 18))
+        header_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        #  descr
+        description_label = QTextEdit("Описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание описание")
+        description_label.setFont(QFont("Arial", 14))
+        description_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+        description_label.setReadOnly(True)
+        # header layout
+        VLayoutHead.addWidget(header_label)
+        VLayoutHead.addWidget(description_label)
+
+        vLayout.addLayout(VLayoutHead)
 
         #  main h layout
         hLayoutMain.addLayout(GridCB)
         # hLayoutMain.addLayout(FeaturLayout) todo
-        self.loggerWidget = LoggerWidget()
-        hLayoutMain.addWidget(self.loggerWidget)
+        # self.loggerWidget = LoggerWidget()
+        # hLayoutMain.addWidget(self.loggerWidget)
 
 
         vLayout.addLayout(hLayoutMain)

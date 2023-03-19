@@ -3,6 +3,7 @@ from enum import Enum
 import models
 
 
+
 class CompFieldType(Enum):
     unit = 1
     range = 2
@@ -13,79 +14,104 @@ class CompFieldType(Enum):
 yes_list = ['да', 'есть', '+', 'yes', 'yep']
 no_list = ['отсуствует', '-', 'нет', 'nope', 'no']
 
+
 battery_dict = {
     'current_discharge': {
-        'keyw': ['разряд тока', 'разряд', 'ток разряда', 'выходной ток', 'ток выхода'],
-        'units': ['Ампер', 'А', 'Амп', 'A'],
+        'keyw': models.SearchParamEnum.CURRENT_DISCHARGE[0],
+        'units': models.SearchParamEnum.CURRENT_DISCHARGE[1],
         'rezValue': '',
         'CompFieldType': CompFieldType.unit
     },
     'capacity': {
-        'keyw': ['емкость', 'ёмкость', 'capacity'],
-        'units': ['мач', 'ач', 'ah', 'mah', 'мaч', 'maч', 'mач'],
+        'keyw': models.SearchParamEnum.CAPASITY[0],
+        'units': models.SearchParamEnum.CAPASITY[1],
         'rezValue': '',
         'CompFieldType': CompFieldType.unit
     },
     'form_factor': {
-        'keyw': ['длина', 'ширина', 'высота', 'размер', 'форм фактор', 'габариты'],
-        'units': ['см', 'м', 'дм', 'cm', 'm', 'dm', 'cм'],
+        'keyw': models.SearchParamEnum.SHAPE[0],
+        'units': models.SearchParamEnum.SHAPE[1],
         'rezValue': '',
         'CompFieldType': CompFieldType.range
     },
     'voltage': {
-        'keyw': ['напряжение', 'voltage'],
-        'units': ['в', 'вольт', 'volt', 'v'],
+        'keyw': models.SearchParamEnum.VOLTAGE[0],
+        'units': models.SearchParamEnum.VOLTAGE[1],
         'rezValue': '',
         'CompFieldType': CompFieldType.unit
     }
 }
-
-microcontroller = {
-    'operating_frequency': {
-        'keyw': ['Микроконтроллер', 'Микропроцессор', 'чип'],
-        'units': ['ГГц', 'Гц', 'Ghz', 'hz'],
-        'rezValue': '',
-        'CompFieldType': CompFieldType.unit
-    },
-    'number_of_channels': {
-        'keyw': ['число каналов', 'количество каналов', 'каналы'],
-        'units': [],
-        'rezValue': '',
-        'CompFieldType': CompFieldType.justNumber
-    },
-    'operating_current': {
-        'keyw': ['рабочий ток', 'ток'],
-        'units': ['а', 'ма', 'мка', 'a', 'ma', 'mca'],
-        'rezValue': '',
-        'CompFieldType': CompFieldType.unit
-    },
-    'working_voltage': {
-        'keyw': ['напряжение', 'voltage'],
-        'units': ['в', 'вольт', 'volt', 'v'],
-        'rezValue': '',
-        'CompFieldType': CompFieldType.unit
-    },
-    'transmission_power': {
-        'keyw': ['Мощность передачи', 'мощность'],
-        'units': ['вт', 'дбм', 'дб'],
-        'rezValue': '',
-        'CompFieldType': CompFieldType.unit
-    },
-    'channel_resolution': {
-        'keyw': ['Разрешение канала', 'Разрешение', 'ширина канала'],
-        'units': ['бит', 'bit', 'байт', 'byte'],
-        'rezValue': '',
-        'CompFieldType': CompFieldType.unit
-    },
-    'wireless_protocol': {
-        'keyw': ['Беспроводной протокол'],
-        'units': ['в', 'вольт', 'volt', 'v'],
-        'rezValue': '',
-        'CompFieldType': CompFieldType.unit
-    }
-
-}
-
+# battery_dict = {
+#     'current_discharge': {
+#         'keyw': ['разряд тока', 'разряд', 'ток разряда', 'выходной ток', 'ток выхода'],
+#         'units': ['Ампер', 'А', 'Амп', 'A'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     },
+#     'capacity': {
+#         'keyw': ['емкость', 'ёмкость', 'capacity'],
+#         'units': ['мач', 'ач', 'ah', 'mah', 'мaч', 'maч', 'mач'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     },
+#     'form_factor': {
+#         'keyw': ['длина', 'ширина', 'высота', 'размер', 'форм фактор', 'габариты'],
+#         'units': ['см', 'м', 'дм', 'cm', 'm', 'dm', 'cм'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.range
+#     },
+#     'voltage': {
+#         'keyw': ['напряжение', 'voltage'],
+#         'units': ['в', 'вольт', 'volt', 'v'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     }
+# }
+#
+# microcontroller = {
+#     'operating_frequency': {
+#         'keyw': ['Микроконтроллер', 'Микропроцессор', 'чип'],
+#         'units': ['ГГц', 'Гц', 'Ghz', 'hz'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     },
+#     'number_of_channels': {
+#         'keyw': ['число каналов', 'количество каналов', 'каналы'],
+#         'units': [],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.justNumber
+#     },
+#     'operating_current': {
+#         'keyw': ['рабочий ток', 'ток'],
+#         'units': ['а', 'ма', 'мка', 'a', 'ma', 'mca'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     },
+#     'working_voltage': {
+#         'keyw': ['напряжение', 'voltage'],
+#         'units': ['в', 'вольт', 'volt', 'v'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     },
+#     'transmission_power': {
+#         'keyw': ['Мощность передачи', 'мощность'],
+#         'units': ['вт', 'дбм', 'дб'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     },
+#     'channel_resolution': {
+#         'keyw': ['Разрешение канала', 'Разрешение', 'ширина канала'],
+#         'units': ['бит', 'bit', 'байт', 'byte'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     },
+#     'wireless_protocol': {
+#         'keyw': ['Беспроводной протокол'],
+#         'units': ['в', 'вольт', 'volt', 'v'],
+#         'rezValue': '',
+#         'CompFieldType': CompFieldType.unit
+#     }
+# }
 
 def ParseBoolean(text: str, keywords: list, localization: int) -> object:
     for kw in keywords:
