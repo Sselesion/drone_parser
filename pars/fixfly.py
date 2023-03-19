@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 from models import *
 
-from .base import Parse
+from ._base import Parse
 from .regex import PtrnEnum, Regex
 
 
