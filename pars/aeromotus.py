@@ -178,6 +178,5 @@ class AeromotusParser(Parse):
             text_list.append(div_specification.get_text(" ", strip=True))
 
         regex = Regex(text_list)
-        print(">>>", regex.raw_text)
 
         return self.fabric[comp](url, image, price, name, regex)

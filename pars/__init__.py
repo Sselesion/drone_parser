@@ -1,9 +1,9 @@
-from .aeromotus import AeromotusParser
 from models import CompEnum
 
-parsers = [
-    AeromotusParser(),
-]
+from .aeromotus import AeromotusParser
+from .fixfly import FixFlyParser
+
+parsers = [AeromotusParser(), FixFlyParser()]
 
 
 def parse(site_idxs: list) -> dict[CompEnum, dict]:
