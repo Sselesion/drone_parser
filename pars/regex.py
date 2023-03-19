@@ -8,6 +8,17 @@ class PtrnEnum(Enum):
     SHAPE = r" размер[ а-я]*:? ([\d+[×XxхХ\]?\d+]+)"
     CURRENT_DISCHARGE = r" разряд тока:? (\d+) [м]?[А]"
 
+    # CompUAVCopterType
+    MAXIMAL_SPEED = r" [е|ё]мкость[ а-я]*:? (\d+)"
+    GAINING_SPEED = r" [е|ё]мкость[ а-я]*:? (\d+)"
+    DECELERATION_SPEED = r" [е|ё]мкость[ а-я]*:? (\d+)"
+    MAXIMAL_RANGE = r" [е|ё]мкость[ а-я]*:? (\d+)"
+    MAXIMUM_FLIGHT_ALTITUDE = r" [е|ё]мкость[ а-я]*:? (\d+)"
+    POWER_CONSUMPTION = r" [е|ё]мкость[ а-я]*:? (\d+)"
+    PAYLOAD_WEIGHT = r" [е|ё]мкость[ а-я]*:? (\d+)"
+    FLIGHT_TIME = r" [е|ё]мкость[ а-я]*:? (\d+)"
+    NUMBER_OF_SCREWS = r" [е|ё]мкость[ а-я]*:? (\d+)"
+
 
 class Regex:
     def __init__(self, texts) -> None:
