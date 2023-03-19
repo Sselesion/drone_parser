@@ -14,9 +14,25 @@ class Regex:
         self.raw_text = self.format_text(texts)
 
     def format_text(self, texts):
+        """Форматирует текст к одному виду для удобного поиска. 
+
+        Args:
+            texts: Кортеж текстов
+            
+        Returns:
+            Форматированная строку 
+        """
         return " " + " ".join(texts).lower().replace("\n", " ").strip()
 
     def find_by(self, ptrn: PtrnEnum) -> str:
+        """Находит характеристику по паттерну 
+
+        Args:
+            ptrn: Экземпляр класса PtrnEnum
+            
+        Returns:
+            Результат работы регулярного выражения
+        """
         regexp = re.compile(ptrn.value)
         re_match = regexp.search(self.raw_text)
         if re_match:
