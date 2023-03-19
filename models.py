@@ -57,14 +57,12 @@ class CompMotorController(Comp):
 class CompFlightController(Comp):
     """Полетный контролер"""
 
-    presence_of_a_barometer: bool  # Наличие барометра;
-    presence_of_a_black_box: bool  # Наличие черного ящика;
+    presence_of_a_barometer: str  # Наличие барометра;
+    presence_of_a_black_box: str  # Наличие черного ящика;
     power: str  # Питание (Вольт);
     firmware: str  # Прошивка (название);
     presence_of_a_usb_connector: str  # Наличие usb разъема;
-    fastening: list[
-        str
-    ]  # Крепление (посадочное место для крепления. Здесь нужно расстояние между отверстиями т.е. 40мм*50мм);
+    fastening: str  # Крепление (посадочное место для крепления. Здесь нужно расстояние между отверстиями т.е. 40мм*50мм);
 
 
 class CompLidar(Comp):
@@ -145,7 +143,7 @@ class CompUAVCopterType(Comp):
     power_consumption: str  # Энергопотребление (Вт/ч)
     payload_weight: str  # Масса полезной погрузки (г)
     flight_time: str  # Продолжительность полета (мин)
-    number_of_screws: int  # Число винтов
+    number_of_screws: str  # Число винтов
 
 
 class CompVideoTransmitter(Comp):
@@ -476,10 +474,10 @@ class SearchParamEnum(Enum):
         ["скорость набора"],
         ["км/ч"]
     )
-    DECELERATION_SPEED = {
+    DECELERATION_SPEED = (
         ["скорость cнижения"],
         ["км/ч"]
-    }
+    )
     MAXIMAL_RANGE = (
         ["дальность полета", "дальность"],
         ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]

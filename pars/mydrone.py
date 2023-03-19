@@ -1,15 +1,12 @@
 import time
 from random import randint
-from typing import Type
 
 import requests
 from bs4 import BeautifulSoup
-from pydantic import BaseModel
 
 from models import *
 
-from .base import Parse
-from .regex import PtrnEnum, Regex
+from ._base import Parse
 
 
 class MyDroneParser(Parse):
@@ -130,8 +127,5 @@ class MyDroneParser(Parse):
         div_description = soup.find("div", id="tabs_content")
         if div_description:
             text_list.append(div_description.get_text(" ", strip=True))
-
-        regex = Regex(text_list)
-        print(">>>", regex.raw_text)
 
         return self.fabric[comp](url, image, price, name, text_list)

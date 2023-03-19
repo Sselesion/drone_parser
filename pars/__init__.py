@@ -1,18 +1,24 @@
 from models import CompEnum
 
-from ui.appLoggerWidget import LoggerWidget
 from .aeromotus import AeromotusParser
 from .fixfly import FixFlyParser
+from .air_hobby import AirHobbyParser
+from .mydrone import MyDroneParser
 
-parsers = [AeromotusParser(), FixFlyParser()]
+parsers = [
+    AeromotusParser(),
+    AirHobbyParser(),
+    MyDroneParser(),
+]
 
 
-def parse(site_idxs: list, loggerWidget: LoggerWidget) -> dict[CompEnum, dict]:
+def parse(site_idxs: list) -> dict[CompEnum, dict]:
     parse_results = {}
     for comp in CompEnum:
-        loggerWidget.info("Запущен поиск для компонента '%s'" % comp)
+        print('>>>>\t', comp)
         for parse in parsers:
             if parse.idx in site_idxs:
-                loggerWidget.info("Поиск компонента произодится для сайта %s" % parse.url)
+                print('>>>>\t', parse.url)
                 parse_results.update({comp: parse.run(comp)})
+    print('RESULT >>>>\t', parse_results)
     return parse_results

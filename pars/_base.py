@@ -128,17 +128,19 @@ class Parse(ABC):
         url: str, image: str, price: str, name: str, text_list: list[str]
     ) -> CompFlightController:
         get_values = GetValues(text_list)
+        presence_of_a_barometer = bool(get_values.get_numeric_value(SearchParamEnum.PRESENCE_OF_A_BAROMETER)),
+        presence_of_a_black_box = bool(get_values.get_numeric_value(SearchParamEnum.PRESENCE_OF_A_BLACK_BOX)),
         return CompFlightController(
             url=url,
             image=image,
             price=price,
             name=name,
-            presence_of_a_barometer=get_values.get_numeric_value(SearchParamEnum.PRESENCE_OF_A_BAROMETER),
-            presence_of_a_black_box=get_values.get_numeric_value(SearchParamEnum.PRESENCE_OF_A_BLACK_BOX),
+            presence_of_a_barometer='Да' if presence_of_a_barometer else 'Нет',
+            presence_of_a_black_box='Да' if presence_of_a_black_box else 'Нет',
             power=get_values.get_numeric_value(SearchParamEnum.POWER),
             firmware=get_values.get_numeric_value(SearchParamEnum.FIRMWARE),
             presence_of_a_usb_connector=get_values.get_numeric_value(SearchParamEnum.PRESENCE_OF_A_USB_CONNECTOR),
-            fastening=[get_values.get_numeric_value(SearchParamEnum.FASTENING)],
+            fastening=get_values.get_numeric_value(SearchParamEnum.FASTENING),
         )
 
     @staticmethod
