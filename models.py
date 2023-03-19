@@ -394,10 +394,6 @@ class SearchParamEnum(Enum):
     )
 
     # Satellitecommmodule
-    BATTERY_AVAILABILITY = (
-        ["батарея"],
-        [],
-    )
     BATTERY_LIFE = (
         ["время", "работы"],
         ["мин", "минут", "часов"],
@@ -407,214 +403,146 @@ class SearchParamEnum(Enum):
         [],
     )
 
-    # Leashingplatform
-    MAX_SPEED = (
-        [],
-        [],
-    )
-    GAINING_SPEED = (
-        [],
-        [],
-    )
-    DECELERATION_SPEED = (
-        [],
-        [],
-    )
-    FLIGHT_RANGE = (
-        [],
-        [],
-    )
-    FLIGHT_ALTITUDE = (
-        [],
-        [],
-    )
-    POWER_CONSUMPTION = (
-        [],
-        [],
-    )
-    PAYLOAD_WEIGHT = (
-        [],
-        [],
-    )
-    FLIGHT_TIME = (
-        [],
-        [],
-    )
-    SCREWS_NUMBER = (
-        [],
-        [],
-    )
-
     # TermalCamera
-    RANGE_DETECTION = {
+    RANGE_DETECTION = (
         ["дальность", "обнаружения", "видимости", "сканирования", "видимость"],
         ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
-    }
-    RANGE_OBSERVATION = {
+    )
+    RANGE_OBSERVATION = (
         ["дистанция наблюдения", "дистанция"],
         ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
-    }
-    INTERFACE = {
+    )
+    INTERFACE = (
         ["интерфейс"],
         ["удобный", "улучшенный", "пользовательский"]
-    }
-    BATTERY_AVAILABILITY = {
+    )
+    BATTERY_AVAILABILITY = (
         ["батарея", "аккумулятор", "аккумуляторная"],
         ["вт/ч", "w/h"]
-    }
-    BATTERY_LIFE = {
-        ["время", "работы"],
-        ["ч", "час", "часов", "h"]
-
-    } 
-    FIELD_OF_VIEW = {
+    )
+    FIELD_OF_VIEW = (
         ["поле", "зрения"],
         ["градусов", "гр.", "°"]
-    }
-    MAGNIFICATION = {
+    )
+    MAGNIFICATION = (
         ["увеличение", "зум", "zoom"],
         ["x", "X"]
-    }
-    PROTECTION_CLASS = {
+    )
+    PROTECTION_CLASS = (
         ["защиты", "защита", "класс", "влаги"],
         ["x", "1", "2", "3", "4", "5", "6", "7", "8", "9",]
-    }
-    WORK_TEMPERATURE = {
+    )
+    WORK_TEMPERATURE = (
         ["рабочая", "температура", "класс", "влаги"],
         ["градусов", "гр.", "°"]
 
-    }
-    TYPE_OF_SENSOR = {
+    )
+    TYPE_OF_SENSOR = (
         ["тип", "сенсор", "sensor"],
         []
-    }
+    )
 
     #UAVCopterType
-    MAXIMAL_SPEED = {
+    MAXIMAL_SPEED = (
         ["максимальная скорость", "макс. скорость", "скорость"],
         ["км/ч"]
-    }
-    GAINING_SPEED = {
-        ["скорость набора"],
-        ["км/ч"]
-    }
-    DECELERATION_SPEED = {
-        ["скорость снижения"],
-        ["км/ч"]
-    }
-    MAXIMAL_RANGE = {
+    )
+    MAXIMAL_RANGE = (
         ["дальность полета", "дальность"],
         ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
-    }
-    MAXIMUM_FLIGHT_ALTITUDE = {
+    )
+    MAXIMUM_FLIGHT_ALTITUDE = (
         ["высота полета", "высота"],
         ["м", "км", "см", "к/м", "m", "km", "cm", "k/m", ]
-    }
-    POWER_CONSUMPTION = {
+    )
+    POWER_CONSUMPTION = (
         ["энергопотребление", "потребление"],
         ["вт/ч", "w/h"]
-    }
-    PAYLOAD_WEIGHT = {
+    )
+    PAYLOAD_WEIGHT = (
         ["масса полезной погрузки", "масса погрузки"],
         ["г", "кг"]
-    }
-    FLIGHT_TIME = {
+    )
+    FLIGHT_TIME = (
         ["продолжительность полета", "время полета"],
         ["мин", "час", "ч"]
-    }
-    NUMBER_OF_SCREws = {
+    )
+    NUMBER_OF_SCREws = (
         ["число винтов", "винты", "винтов"],
-        [""]
-    }
+        []
+    )
 
     #VideoTransmitter
-    FREQUENCY = {
-        ["частота приема", "частота"],
-        ["ггц", "гц", "мгц"]
-    }
-    WATTAGE = {
+    WATTAGE = (
         ["мощность"],
         ["мвт", "вт"]
-    }
-    NUMBER_OF_CHANNELS = {
-        ["число каналов", "каналы"],
-        [""]
-    }
-    ANTENNA_CONNECTOR = {
+    )
+    ANTENNA_CONNECTOR = (
         ["разъем антены", "антена"],
         []
-    }
+    )
 
     #Payload
-    MATRIX = {
+    MATRIX = (
         ["матрица"],
         []
-    }
-    LENS = {
+    )
+    LENS = (
         ["объектив"],
         []
-    }
-    NUMBER_OF_MEGAPIXELS = {
+    )
+    NUMBER_OF_MEGAPIXELS = (
         ["число мегапикселей", "мегапикселей"],
         []
-    }
-    RESOLUTION_TVL = {
+    )
+    RESOLUTION_TVL = (
         ["разрешение"],
         []
-    }
-    COMPANION_IMAGE = {
+    )
+    COMPANION_IMAGE = (
         ["сопровождение"],
         []
-    }
-    THERMAL_IMAGER_RESOLUTION = {
+    )
+    THERMAL_IMAGER_RESOLUTION = (
         ["разрешение", "разрешение тепловизора"],
         []
-    }
-    RANGEFINDER = {
+    )
+    RANGEFINDER = (
         ["дальномер"],
         []
-    }
-    AXES = {
+    )
+    AXES = (
         ["оси стабилизации", "оси", "число осей"],
         []
-    }
-    ACCURACY = {
-        ["точность"],
-        []
-    }
-    TANGENT = {
+    )
+    
+    TANGENT = (
         ["углы стабилизации", "тангаж", "угол стабилизации"],
         []
-    }
-    ROLL = {
+    )
+    ROLL = (
         ["углы стабилизации", "крен"],
         []
-    }
-    YAW = {
+    )
+    YAW = (
         ["углы стабилизации", "рысканье"],
         []
-    }
-    CURRENT = {
+    )
+    CURRENT = (
         ["ток"],
         ["ма", "а"]
-    }
-    ANTENNA = {
+    )
+    ANTENNA = (
         ["антенна"],
         []
-    }
+    )
     
     #ControlPanel
-    TRANSMISSION_POWER = {
-        ["мощность передачи", "передача"],
-        ["дбм"]
-    }
-    RESOLUTION = {
+    
+    RESOLUTION = (
         ["разрешение", "разрешение канала"],
         []
-    }
-    WIRELESS_PROTOCOL = {
-        ["беспроводной протокол", "протокол"],
-        []
-    }
+    )
+    
 
 
