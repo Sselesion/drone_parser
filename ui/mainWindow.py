@@ -48,6 +48,7 @@ class MainWindow(QWidget):
             "aeromotus.ru",
             "air-hobby.ru",
             "mydrone.ru",
+            "fixfly.ru"
         ]
         GridCB = QGridLayout()
         for i, v in enumerate(self.listCheckBox):

@@ -12,7 +12,7 @@ from ._base import Parse
 class MyDroneParser(Parse):
     def __init__(self) -> None:
         """Инициализирует экземпляр класса AeromotusParser"""
-        super().__init__(url="https://mydrone.ru/", idx=3)
+        super().__init__(url="https://mydrone.ru/", idx=2)
 
         self.request_fabric = {
             # КОМПОНЕНТ -> URL && ПАРАМЕТРЫ ЗАПРОСА
@@ -107,6 +107,7 @@ class MyDroneParser(Parse):
         Returns:
             Объект типа Comp
         """
+        print("Получение данных для компонента '%s' по товару: %s" % (comp.value, url))
         response = requests.get(url)
         time.sleep(randint(1, 4))
         soup = BeautifulSoup(response.text, "html.parser")

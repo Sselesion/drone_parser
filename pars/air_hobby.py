@@ -203,6 +203,7 @@ class AirHobbyParser(Parse):
         return url_list
 
     def parse_card(self, url: str, comp: CompEnum) -> Comp:
+        print("Получение данных для компонента '%s' по товару: %s" % (comp.value, url))
         response = requests.get(url)
         time.sleep(randint(1, 4))
         soup = BeautifulSoup(response.text, "html.parser")

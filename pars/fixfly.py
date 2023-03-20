@@ -1,4 +1,5 @@
 import time
+import re
 from random import randint
 from typing import Type
 
@@ -13,7 +14,7 @@ from ._base import Parse
 
 class FixFlyParser(Parse):
     def __init__(self) -> None:
-        super().__init__(url="https://fixfly.ru/", idx=2)
+        super().__init__(url="https://fixfly.ru/", idx=3)
 
         self.request_fabric = {
             # КОМПОНЕНТ -> URL && ПАРАМЕТРЫ ЗАПРОСА
@@ -84,12 +85,49 @@ class FixFlyParser(Parse):
         response = requests.get(*self.request_fabric[comp])
         time.sleep(randint(1, 4))
 
-        for card_url in self.detect_cards(response.text, self.key_words[comp]):
+        for card_url in self.detect_cards(response.text, self.key_words[comp], comp):
             result.update({card_url: self.parse_card(card_url, comp).dict()})
         return result
 
-    def detect_cards(self, html_text: str, key_words: list) -> list[str]:
-        pass
+    def detect_cards(
+        self, html_text: str, key_words: list, comp: CompEnum
+    ) -> list[str]:
+        url_list = []
+        soup = BeautifulSoup(html_text, "html.parser")
+
+        for div in soup.find_all("div", class_="item_zip"):
+            span = div.find("span", class_="desc")
+            # Итерация по ключевым словам
+            if "text" in self.request_fabric[comp][1].keys():
+                for key_word in key_words:
+                    for word in span.string.lower().split():
+                        # Точное соответсвие слова в названии
+                        if key_word == word:
+                            a = div.find("a", id=re.compile(r"zip_.+"))
+                            url_list.append(self.url + a.get("href")[2::])
+                            break
+            else:
+                a = div.find("a", id=re.compile(r"zip_.+"))
+                url_list.append(self.url + a.get("href")[2::])
+        return url_list
 
     def parse_card(self, url: str, comp: CompEnum) -> Comp:
-        pass
+        print("Получение данных для компонента '%s' по товару: %s" % (comp.value, url))
+
+        response = requests.get(url)
+        time.sleep(randint(1, 4))
+        soup = BeautifulSoup(response.text, "html.parser")
+        # Получение изображения, цены, названия товара
+        img = soup.find("img", attrs={"itemprop": "image"})
+        image = self.url + img.get("src")
+        span_itemprop = soup.find("span", attrs={"itemprop": "price"})
+        price = span_itemprop.string.strip()
+        h1_itemprop = soup.find("h1", attrs={"itemprop": "name"})
+        name = h1_itemprop.string.strip()
+
+        text_list = []
+        div_description = soup.find("div", attrs={"itemprop": "description"})
+        if div_description:
+            text_list.append(div_description.get_text(" ", strip=True))
+
+        return self.fabric[comp](url, image, price, name, text_list)
