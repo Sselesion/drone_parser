@@ -113,10 +113,8 @@ class MyDroneParser(Parse):
 
         # Получение изображения, цены, названия товара
         div = soup.find("div", class_="owl-item")
-        # print(div.text)
         img = soup.find("img")
         image = img.get("src")
-        print(image)
         p = soup.find("span", class_="ty-price-num")
         price = p.get_text()
         h1 = soup.find("h1", class_="ut2-pb__title")

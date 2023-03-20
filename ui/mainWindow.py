@@ -13,7 +13,7 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-import get_excel
+from get_excel import parse_and_write_excel 
 import pars
 
 from PyQt6.QtCore import QThread
@@ -26,6 +26,19 @@ class DroneParser(QThread):
     def run(self):
         parse_result = pars.parse(self.site_ids)
         get_excel.make(parse_result)
+        print(parse_result)
+
+
+from PyQt6.QtCore import QThread
+
+class DroneParser(QThread):
+    def __init__(self, site_ids):
+        super().__init__()
+        self.site_ids = site_ids
+
+    def run(self):
+        parse_result = pars.parse(self.site_ids)
+        parse_and_write_excel(parse_result)
         print(parse_result)
 
 
@@ -112,12 +125,6 @@ class MainWindow(QWidget):
     def _createAction(self):
         self.parseBtn.clicked.connect(self._startParsing)
 
-    def _save(self):
-        if not self.parsed_data:
-            self.ShowDialog("Перед выгрузкой данных необходимо запустить их поиск")
-        else:
-            get_excel.make(self.parsed_data)
-            self.ShowDialog("Данные выгружены в excel таблицу!")
 
     def ShowDialog(self, text: str):
         """
@@ -131,11 +138,9 @@ class MainWindow(QWidget):
         button = dlg.exec()
 
         if button == QMessageBox.StandardButton.Yes:
-            print("Да")
+            pass
         else:
-            print("Нет")
-        # if button == QMessageBox.standardButton:
-        #     print("OK!")
+            pass
 
     def _startParsing(self):
 
@@ -164,5 +169,4 @@ class MainWindow(QWidget):
                 "Парсинг прошел успешно!!"
             )
         del self.droneparser
-
 

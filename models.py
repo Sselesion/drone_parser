@@ -151,7 +151,7 @@ class CompVideoTransmitter(Comp):
 
     frequency: str  # Частота приема (ГГц)
     wattage: str  # Мощность (мВт)
-    number_of_channels: int  # Число каналов
+    number_of_channels: str  # Число каналов
     antenna_connector: str  # Разъем антенны
 
 
