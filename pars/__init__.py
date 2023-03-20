@@ -9,6 +9,7 @@ parsers = [
     AeromotusParser(),
     AirHobbyParser(),
     MyDroneParser(),
+    FixFlyParser(),
 ]
 
 

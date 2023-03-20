@@ -154,7 +154,7 @@ class MainWindow(QWidget):
         self.parseBtn.setText("ЗАПУСТИТЬ ПОИСК")
         self.parseBtn.setEnabled(True)
         self.ShowDialog(
-                "Парсинг прошел успешно!!"
+                "Парсинг прошел успешно!"
             )
         del self.droneparser
 
