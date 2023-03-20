@@ -15,12 +15,12 @@ parsers = [
 def parse(site_idxs: list) -> dict[CompEnum, dict]:
     parse_results = {}
     for comp in CompEnum:
-        print("Поиск для компонента:\t\t", comp.value)
+        print("Поиск для компонента: ", comp.value)
 
         curr_parse_result = {}
         for parse in parsers:
             if parse.idx in site_idxs:
-                print("На сайте:\t\t", parse.url)
+                print("На сайте: ", parse.url)
                 curr_parse_result.update(parse.run(comp))
 
         parse_results.update({comp: curr_parse_result})

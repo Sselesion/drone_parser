@@ -197,6 +197,7 @@ class AeromotusParser(Parse):
         Returns:
             Объект типа Comp
         """
+        print("Получение данных для компонента '%s' по товару: %s" % (comp.value, url))
         response = requests.get(url)
         time.sleep(randint(1, 4))
         soup = BeautifulSoup(response.text, "html.parser")
