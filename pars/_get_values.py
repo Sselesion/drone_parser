@@ -28,7 +28,6 @@ class GetValues:
                 if index_list == -1:
                     continue
                 nums = re.findall(r"\d+[.,\d*]*", target_area[:index_list])
-                print(nums[-1])
                 return nums[-1] if nums else '-'
         return '-'
 

@@ -13,8 +13,21 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-import get_excel
+from get_excel import parse_and_write_excel 
 import pars
+
+from PyQt6.QtCore import QThread
+
+class DroneParser(QThread):
+    def __init__(self, site_ids):
+        super().__init__()
+        self.site_ids = site_ids
+
+    def run(self):
+        parse_result = pars.parse(self.site_ids)
+        parse_and_write_excel(parse_result)
+        print(parse_result)
+
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -65,8 +78,8 @@ class MainWindow(QWidget):
         #  descr
         description_label = QTextEdit(
             "Данная программа осуществляет поиск комплектующих для БпЛА. Необходимо выбрать сайты, в которых будет осуществляться поиск.\
-            Нажатие на кнопку \"ЗАПУСТИТЬ ПОИСК\" осуществлит поиск комплектующих.\
-            Нажатие на кнопку \"ВЫГРУЗИТЬ EXCEL файл\" осуществлит выгрузку комплектующих в Excel."
+            Нажатие на кнопку \"ЗАПУСТИТЬ ПОИСК\" осуществит поиск комплектующих и\
+            выгрузит данные в Excel файл, лежащий в директории проекта, с названием \"result.xlsx.\""
         )
         description_label.setFont(QFont("Tahoma", 12))
         description_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
@@ -88,9 +101,6 @@ class MainWindow(QWidget):
         self.parseBtn = QPushButton("ЗАПУСТИТЬ ПОИСК")
         hLayoutFooter.addWidget(self.parseBtn)
 
-        self.saveBtn = QPushButton("Выгрузить EXCEL файл")
-        hLayoutFooter.addWidget(self.saveBtn)
-
         vLayout.addLayout(hLayoutFooter)
 
         #  window layout
@@ -101,14 +111,7 @@ class MainWindow(QWidget):
 
     def _createAction(self):
         self.parseBtn.clicked.connect(self._startParsing)
-        self.saveBtn.clicked.connect(self._save)
 
-    def _save(self):
-        if not self.parsed_data:
-            self.ShowDialog("Перед выгрузкой данных необходимо запустить их поиск")
-        else:
-            get_excel.make(self.parsed_data)
-            self.ShowDialog("Данные выгружены в excel таблицу!")
 
     def ShowDialog(self, text: str):
         """
@@ -127,6 +130,7 @@ class MainWindow(QWidget):
             pass
 
     def _startParsing(self):
+
         parsing_sites_ids = []
         for i, v in enumerate(self.listCheckBox):
             if v.isChecked():
@@ -138,4 +142,18 @@ class MainWindow(QWidget):
             self.ShowDialog(
                 "Получение информации по комплекутющим может занять продолжительное время!"
             )
-            self.parsed_data = pars.parse(parsing_sites_ids)
+            self.parseBtn.setText("Поиск комплектующих...")
+            self.parseBtn.setEnabled(False)
+            self.droneparser = DroneParser(parsing_sites_ids)
+            self.droneparser.finished.connect(self.parseFinished)
+            self.droneparser.start()
+
+
+    def parseFinished(self):
+        self.parseBtn.setText("ЗАПУСТИТЬ ПОИСК")
+        self.parseBtn.setEnabled(True)
+        self.ShowDialog(
+                "Парсинг прошел успешно!!"
+            )
+        del self.droneparser
+
