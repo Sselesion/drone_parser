@@ -16,6 +16,18 @@ from PyQt6.QtWidgets import (
 import get_excel
 import pars
 
+from PyQt6.QtCore import QThread
+
+class DroneParser(QThread):
+    def __init__(self, site_ids):
+        super().__init__()
+        self.site_ids = site_ids
+
+    def run(self):
+        parse_result = pars.parse(self.site_ids)
+        print(parse_result)
+
+
 class MainWindow(QWidget):
     def __init__(self):
         """
@@ -129,6 +141,7 @@ class MainWindow(QWidget):
         #     print("OK!")
 
     def _startParsing(self):
+
         parsing_sites_ids = []
         for i, v in enumerate(self.listCheckBox):
             if v.isChecked():
@@ -140,4 +153,17 @@ class MainWindow(QWidget):
             self.ShowDialog(
                 "Получение информации по комплекутющим может занять продолжительное время!"
             )
-            self.parsed_data = pars.parse(parsing_sites_ids)
+            self.parseBtn.setEnabled(False)
+            self.droneparser = DroneParser(parsing_sites_ids)
+            self.droneparser.finished.connect(self.parseFinished)
+            self.droneparser.start()
+
+
+    def parseFinished(self):
+        self.parseBtn.setEnabled(True)
+        self.ShowDialog(
+                "Парсинг прошел успешно!!"
+            )
+        del self.droneparser
+
+
