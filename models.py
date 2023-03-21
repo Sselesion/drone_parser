@@ -51,7 +51,7 @@ class CompMotorController(Comp):
 
     operating_current: str  # Рабочий ток (Ампер);
     peak_current: str  # Пиковый ток (Ампер);
-    power_support: bool  # Поддержка питания (Да/Нет);
+    power_support: str  # Поддержка питания (Да/Нет);
 
 
 class CompFlightController(Comp):
@@ -97,7 +97,7 @@ class CompRangeFinder(Comp):
 class CompSatelliteCommModule(Comp):
     """Модуль спутниковой связи"""
 
-    battery_availability: bool  # Наличие батареи
+    battery_availability: str  # Наличие батареи
     battery_life: str  # Время работы от батареи (часов)
     accuracy: str  # Погрешность (м)
 
